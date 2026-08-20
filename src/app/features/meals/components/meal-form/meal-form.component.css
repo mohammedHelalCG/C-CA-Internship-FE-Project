@@ -1,0 +1,15 @@
+.meal-form {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+small {
+  color: #dc2626;
+}

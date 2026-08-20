@@ -1,0 +1,98 @@
+<div class="meal-form">
+
+  <h2>{{ isEditMode ? 'Edit Meal' : 'Create Meal' }}</h2>
+
+  <form [formGroup]="mealForm" (ngSubmit)="onSubmit()">
+
+    <!-- Meal Name -->
+    <div class="field">
+      <label for="name">Meal Name</label>
+
+      <input
+        id="name"
+        type="text"
+        pInputText
+        formControlName="name"
+        placeholder="Enter meal name"
+      />
+
+      @if (mealForm.controls.name.touched && mealForm.controls.name.invalid) {
+        <small>Name is required.</small>
+      }
+    </div>
+
+
+    <!-- Category -->
+    <div class="field">
+      <label for="category">Category</label>
+
+      <p-select
+        id="category"
+        formControlName="category"
+        [options]="categories"
+        placeholder="Select category"
+      />
+
+      @if (mealForm.controls.category.touched && mealForm.controls.category.invalid) {
+        <small>Category is required.</small>
+      }
+    </div>
+
+
+    <!-- Price -->
+    <div class="field">
+      <label for="price">Price</label>
+
+      <p-inputNumber
+        id="price"
+        formControlName="price"
+        [min]="0"
+        mode="currency"
+        currency="EGP"
+      />
+
+      @if (mealForm.controls.price.touched && mealForm.controls.price.invalid) {
+        <small>Enter a valid price.</small>
+      }
+    </div>
+
+
+    <!-- Description -->
+    <div class="field">
+      <label for="description">Description</label>
+
+      <textarea
+        id="description"
+        pTextarea
+        formControlName="description"
+        rows="4"
+        placeholder="Enter meal description"
+      ></textarea>
+
+      @if (mealForm.controls.description.touched && mealForm.controls.description.invalid) {
+        <small>Description is required.</small>
+      }
+    </div>
+
+
+    <!-- Image -->
+    <div class="field">
+      <label for="image">Image (Optional)</label>
+
+      <input
+        id="image"
+        type="file"
+        accept="image/*"
+      />
+    </div>
+
+
+    <!-- Submit -->
+    <p-button
+      type="submit"
+      [label]="isEditMode ? 'Update Meal' : 'Save Meal'"
+    />
+
+  </form>
+
+</div>
