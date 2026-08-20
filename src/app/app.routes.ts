@@ -4,8 +4,13 @@ export const routes: Routes = [
   {
     path: 'meals',
     loadChildren: () =>
-      import('./features/meals/meals.routes').then(
-        (m) => m.MEALS_ROUTES
-      )
+      import('./features/meals/meals.routes')
+        .then(m => m.MEALS_ROUTES)
+  },
+
+  {
+    path: '',
+    redirectTo: 'meals/create',
+    pathMatch: 'full'
   }
 ];

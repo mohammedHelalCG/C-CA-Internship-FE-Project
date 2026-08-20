@@ -6,21 +6,36 @@ import { Meal } from '../models/meal.model';
 })
 export class MealService {
 
-  /**
-   * Creates a meal using the submitted form data.
-   * Replace the temporary implementation with the backend API call
-   * when the meal endpoint is available.
-   */
-  createMeal(meal: Meal): void {
-    console.log('Create meal:', meal);
+  private meals: Meal[] = [
+    {
+      id: 1,
+      name: 'Chicken Burger',
+      category: 'Main Course',
+      price: 120,
+      description: 'Chicken burger with cheese',
+      image: ''
+    }
+  ];
+
+  getMeals(): Meal[] {
+    return this.meals;
   }
 
-  /**
-   * Updates an existing meal using its identifier.
-   * Replace the temporary implementation with the backend API call
-   * when the meal endpoint is available.
-   */
-  updateMeal(id: number, meal: Meal): void {
-    console.log('Update meal:', id, meal);
+  getMealById(id: number): Meal | undefined {
+    return this.meals.find(meal => meal.id === id);
+  }
+
+  createMeal(meal: Meal): void {
+    this.meals.push(meal);
+  }
+
+  updateMeal(updatedMeal: Meal): void {
+    const index = this.meals.findIndex(
+      meal => meal.id === updatedMeal.id
+    );
+
+    if (index !== -1) {
+      this.meals[index] = updatedMeal;
+    }
   }
 }

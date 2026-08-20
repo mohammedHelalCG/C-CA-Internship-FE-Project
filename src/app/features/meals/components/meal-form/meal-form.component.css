@@ -1,15 +1,30 @@
 .meal-form {
-  max-width: 600px;
-  margin: 2rem auto;
+  width: 500px;
+  margin: 40px auto;
 }
 
-.field {
+h1 {
+  margin-bottom: 30px;
+}
+
+.form-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-small {
+label {
+  font-weight: 500;
+}
+
+.error {
   color: #dc2626;
+}
+
+input,
+textarea,
+p-select,
+p-inputnumber {
+  width: 100%;
 }

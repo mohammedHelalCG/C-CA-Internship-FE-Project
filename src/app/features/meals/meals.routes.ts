@@ -1,13 +1,16 @@
 import { Routes } from '@angular/router';
-import { MealFormComponent } from './components/meal-form/meal-form.component';
 
 export const MEALS_ROUTES: Routes = [
   {
     path: 'create',
-    component: MealFormComponent
+    loadComponent: () =>
+      import('./components/meal-form/meal-form.component')
+        .then(m => m.MealFormComponent)
   },
   {
-    path: ':id/edit',
-    component: MealFormComponent
+    path: 'edit/:id',
+    loadComponent: () =>
+      import('./components/meal-form/meal-form.component')
+        .then(m => m.MealFormComponent)
   }
 ];

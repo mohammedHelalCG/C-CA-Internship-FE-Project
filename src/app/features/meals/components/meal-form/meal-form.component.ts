@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
@@ -8,14 +8,14 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 
-import { MealService } from '../../services/meal.service';
 import { Meal } from '../../models/meal.model';
+import { MealService } from '../../services/meal.service';
 
 @Component({
   selector: 'app-meal-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
+    FormsModule,
     InputTextModule,
     SelectModule,
     InputNumberModule,
@@ -25,43 +25,54 @@ import { Meal } from '../../models/meal.model';
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.css'
 })
-export class MealFormComponent {
+export class MealFormComponent implements OnInit {
 
-  private readonly fb = inject(FormBuilder);
-  private readonly mealService = inject(MealService);
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
+  isEditMode = false;
+  mealId!: number;
 
-  readonly categories = [
+  categories = [
     'Breakfast',
     'Main Course',
     'Dessert',
     'Beverage'
   ];
 
-  readonly mealForm = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    category: ['', Validators.required],
-    price: [0, [Validators.required, Validators.min(0.01)]],
-    description: ['', Validators.required]
-  });
+  meal: Meal = {
+    id: 0,
+    name: '',
+    category: '',
+    price: 0,
+    description: '',
+    image: ''
+  };
 
-  readonly isEditMode = this.route.snapshot.paramMap.has('id');
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private mealService: MealService
+  ) {}
 
-  onSubmit(): void {
-    if (this.mealForm.invalid) {
-      this.mealForm.markAllAsTouched();
-      return;
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.isEditMode = true;
+      this.mealId = Number(id);
+
+      const existingMeal = this.mealService.getMealById(this.mealId);
+
+      if (existingMeal) {
+        this.meal = { ...existingMeal };
+      }
     }
+  }
 
-    const meal: Meal = this.mealForm.getRawValue();
-
+  saveMeal(): void {
     if (this.isEditMode) {
-      const id = Number(this.route.snapshot.paramMap.get('id'));
-
-      this.mealService.updateMeal(id, meal);
+      this.mealService.updateMeal(this.meal);
     } else {
-      this.mealService.createMeal(meal);
+      this.meal.id = Date.now();
+      this.mealService.createMeal(this.meal);
     }
 
     this.router.navigate(['/meals']);
