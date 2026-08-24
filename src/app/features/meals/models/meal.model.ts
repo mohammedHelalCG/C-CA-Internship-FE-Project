@@ -1,8 +1,9 @@
 export interface Meal {
   id: number;
   name: string;
+  description: string;
   category: string;
   price: number;
-  description: string;
+  available: boolean; // Will be modified and changed to STOCK later on
   image?: string;
 }
