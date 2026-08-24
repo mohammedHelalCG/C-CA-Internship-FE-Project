@@ -43,7 +43,8 @@ export class MealFormComponent implements OnInit {
     category: '',
     price: 0,
     description: '',
-    image: ''
+    image: '',
+    available: true
   };
 
   constructor(

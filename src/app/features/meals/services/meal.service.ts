@@ -11,7 +11,8 @@ export class MealService {
       category: 'Main Course',
       price: 350,
       description: 'Chicken burger with cheese',
-      image: ''
+      image: '',
+      available: true
     },
     {
       id: 2,
@@ -19,7 +20,8 @@ export class MealService {
       category: 'Main Course',
       price: 500,
       description: 'Pasta white sauce',
-      image: ''
+      image: '',
+      available: true
     },
     {
       id: 3,
@@ -27,7 +29,8 @@ export class MealService {
       category: 'Appetizer',
       price: 190,
       description: 'caesar salad',
-      image: ''
+      image: '',
+      available: true
     },
     {
       id: 4,
@@ -35,7 +38,8 @@ export class MealService {
       category: 'Sides',
       price: 120,
       description: 'French fries with a side of a dip',
-      image: ''
+      image: '',
+      available: true
     }
   ];
   getMeals(): Meal[] {
