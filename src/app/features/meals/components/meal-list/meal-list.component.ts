@@ -4,7 +4,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import { Meal } from '../../models/meal.model';
+import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 
 @Component({
