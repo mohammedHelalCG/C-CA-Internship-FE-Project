@@ -8,7 +8,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 
-import { Meal } from '../../models/meal.model';
+import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'meals',
+    path: 'meals-list',
     loadChildren: () =>
       import('./features/meals/meals.routes')
         .then(m => m.MEALS_ROUTES)
