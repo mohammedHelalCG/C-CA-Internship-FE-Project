@@ -8,11 +8,10 @@ export interface Meal {
   stock: number | null;
 
   // nutrition (Figma: Nutritional Breakdown)
-  ingredients?: string;
-  calories?: number;
-  protein?: number;
-  carbs?: number;
-  fat?: number;
+  calories?: number | null;
+  protein?: number | null;
+  carbs?: number | null;
+  fat?: number | null;
 
   // dietary classifications
   vegetarian?: boolean;

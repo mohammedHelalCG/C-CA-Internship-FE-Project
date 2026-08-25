@@ -22,11 +22,25 @@
   gap: 2rem;                    /* 32px */
 }
 
-/* category hugs its radios; price and stock split the rest */
+/* category hugs its radios; price takes the rest */
 .field-row {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto 1fr;
   gap: 1.5rem;
+}
+
+/* required-field marker on labels */
+.req {
+  color: #DE350B;
+}
+
+/* unified message under an empty essential after a save attempt */
+.field-error {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;           /* 12px */
+  font-weight: 400;
+  color: #DE350B;
 }
 
 .nutrition-grid {
@@ -44,6 +58,10 @@
   border: 1px dashed #D1D6E0;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.dropzone.invalid {
+  border-color: #DE350B;
 }
 
 .dropzone-icon {

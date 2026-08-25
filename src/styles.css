@@ -71,9 +71,8 @@ button {
 .page {
   max-width: 90rem;             /* 1440px */
   margin: 0 auto;
-/* TODO(header): revert top padding to 3rem once the app header component lands.
-     Design says 3rem, measured below the 69px header — the extra 1.5rem fakes
-     the missing header's space for now. */
+  /* design says 3rem top, measured below the app header;
+     extra until the header exists — revert to 3rem then instead of the 4.5rem */
   padding: 4.5rem 3rem 3rem;
 }
 
@@ -189,6 +188,34 @@ textarea.p-textarea:enabled:focus,
 .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
   background: #0070AD;
   border-color: #0070AD;
+}
+
+/* toast — styled like the design's alert panels */
+.p-toast .p-toast-message {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+.p-toast .p-toast-message-error {
+  background: #FFEBE6;
+  color: #DE350B;
+}
+
+.p-toast .p-toast-message-error .p-toast-message-icon,
+.p-toast .p-toast-message-error .p-toast-close-button {
+  color: #DE350B;
+}
+
+.p-toast .p-toast-summary {
+  font-size: 0.875rem;          /* 14px */
+  font-weight: 700;
+}
+
+.p-toast .p-toast-detail {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #5B6770;
 }
 
 /* required fields left empty after a save attempt turn red */
