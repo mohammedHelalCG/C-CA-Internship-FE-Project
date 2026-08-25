@@ -1,30 +1,172 @@
+/* layout only — page frame, title block, colors, controls and cards
+   all come from the global styles (.page, .page-header, .card, .btn) */
+
 .meal-form {
-  width: 500px;
-  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 33.75rem;   /* 540px */
+  gap: 2rem;                    /* 32px */
 }
 
-h1 {
-  margin-bottom: 30px;
-}
-
-.form-field {
+.form-main,
+.form-side {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 1.5rem;                  /* 24px */
 }
 
-label {
-  font-weight: 500;
+/* right column: nutrition card with the actions pinned under it,
+   so Cancel/Save stay visible without scrolling past the left card */
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;                    /* 32px */
 }
 
-.error {
-  color: #dc2626;
+/* category hugs its radios; price and stock split the rest */
+.field-row {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 1.5rem;
 }
 
-input,
-textarea,
-p-select,
-p-inputnumber {
-  width: 100%;
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;             /* 16px 24px */
+}
+
+/* photo dropzone */
+.dropzone {
+  display: block;
+  padding: 2rem;                /* 32px */
+  text-align: center;
+  background: #F3F5F9;
+  border: 1px dashed #D1D6E0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropzone-icon {
+  display: block;
+  margin: 0 auto 0.75rem;       /* 12px */
+  font-size: 1.5rem;            /* 24px */
+  color: #232930;
+}
+
+.dropzone-text {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0070AD;
+}
+
+.dropzone-hint {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;           /* 12px */
+  font-weight: 400;
+  color: #5B6770;
+}
+
+/* after-upload state: thumbnail + file info + replace link */
+.upload-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: #FFFFFF;
+  border: 1px solid #0070AD;
+  border-radius: 8px;
+}
+
+.upload-thumb {
+  width: 12rem;                 /* 192px */
+  height: 6.75rem;              /* 108px, 16:9 */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.upload-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;                 /* 4px */
+}
+
+.upload-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.upload-meta {
+  font-size: 0.75rem;
+  color: #5B6770;
+}
+
+.upload-replace {
+  margin: 0.25rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0070AD;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+/* category radio buttons: options sit inline, centered on the 44px row */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 2.75rem;              /* 44px */
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-option label {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* checkbox rows: label sits inline next to the box */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;                 /* 12px */
+}
+
+.checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* invalid-state styles live in the global styles.css —
+   they must reach inside PrimeNG components, which
+   component-scoped CSS cannot do */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;                 /* 12px */
+  margin-top: auto;             /* pins the row to the column's bottom,
+                                   level with the left card's bottom edge */
 }
