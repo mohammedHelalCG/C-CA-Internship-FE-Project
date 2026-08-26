@@ -10,6 +10,8 @@ import { ButtonModule } from 'primeng/button';
 
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
+import { HeaderComponent } from '../../../../shared/components/header/header.component';
+
 
 @Component({
   selector: 'app-meal-form',
@@ -20,7 +22,8 @@ import { MealService } from '../../services/meal.service';
     SelectModule,
     InputNumberModule,
     TextareaModule,
-    ButtonModule
+    ButtonModule,
+    HeaderComponent
   ],
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.css'

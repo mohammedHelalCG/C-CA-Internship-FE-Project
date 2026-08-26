@@ -10,7 +10,7 @@ export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'meals',
+    redirectTo: 'meals-list',
     pathMatch: 'full'
   }
 ];
