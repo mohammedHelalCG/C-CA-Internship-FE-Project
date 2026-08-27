@@ -5,7 +5,7 @@ import {
   FormBuilder,
   ReactiveFormsModule,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,12 +17,7 @@ import { MessageService } from 'primeng/api';
 
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
-
-/* like Validators.required, but a whitespace-only name also fails */
-function requiredTrimmed(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-  return typeof value === 'string' && value.trim() ? null : { required: true };
-}
+import { validate } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-meal-form',
@@ -33,43 +28,33 @@ function requiredTrimmed(control: AbstractControl): ValidationErrors | null {
     RadioButtonModule,
     InputNumberModule,
     TextareaModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [MessageService],
   templateUrl: './meal-form.component.html',
-  styleUrl: './meal-form.component.css'
+  styleUrl: './meal-form.component.css',
 })
 export class MealFormComponent implements OnInit {
-
   private fb = inject(FormBuilder);
 
   isEditMode = false;
   mealId!: number;
 
-  image = '';
+  image? = '';
   imageName = '';
   imageMeta = '';
 
-  triedToSave = false;
+  categories = ['Appetizer', 'Main Course'];
 
-  /* stock is set on the add-meal-to-menu page, not here;
-     preserved on edit so updating a meal doesn't wipe it */
-  private currentStock: number | null = null;
-
-  categories = [
-    'Appetizer',
-    'Main Course'
-  ];
-
-  form = this.fb.group({
-    name: ['', requiredTrimmed],
-    category: ['', Validators.required],
-    price: this.fb.control<number | null>(null, Validators.required),
+  mealForm = this.fb.group({
+    name: ['', [Validators.required]],
+    category: ['', [Validators.required]],
+    price: [0, [Validators.required, Validators.min(1)]],
     description: [''],
-    calories: this.fb.control<number | null>(null),
-    protein: this.fb.control<number | null>(null),
-    carbs: this.fb.control<number | null>(null),
-    fat: this.fb.control<number | null>(null),
+    calories: [null],
+    protein: [null],
+    carbs: [null],
+    fat: [null],
     vegetarian: [false],
     vegan: [false],
     glutenFree: [false],
@@ -78,7 +63,7 @@ export class MealFormComponent implements OnInit {
     allergenDairy: [false],
     allergenFish: [false],
     allergenGluten: [false],
-    allergenSoy: [false]
+    allergenSoy: [false],
   });
 
   constructor(
@@ -86,24 +71,23 @@ export class MealFormComponent implements OnInit {
     private router: Router,
     private mealService: MealService,
     private cdr: ChangeDetectorRef,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
-      this.isEditMode = true;
-      this.mealId = Number(id);
+    // if (id) {
+    //   this.isEditMode = true;
+    //   this.mealId = Number(id);
 
-      const existingMeal = this.mealService.getMealById(this.mealId);
+    //   const existingMeal = this.mealService.getMealById(this.mealId);
 
-      if (existingMeal) {
-        this.form.patchValue(existingMeal);
-        this.image = existingMeal.image;
-        this.currentStock = existingMeal.stock;
-      }
-    }
+    //   if (existingMeal) {
+    //     this.mealForm.patchValue(existingMeal);
+    //     this.image = existingMeal.image;
+    //   }
+    // }
   }
 
   onImageSelected(event: Event): void {
@@ -152,27 +136,28 @@ export class MealFormComponent implements OnInit {
   }
 
   saveMeal(): void {
-    if (this.form.invalid) {
-      this.triedToSave = true;
+    if (this.mealForm.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Missing required fields',
-        detail: 'Please fill all fields marked with * before saving.'
+        detail: 'Please fill all fields marked with * before saving.',
       });
       return;
     }
 
     /* plain fb.group controls are nullable, so map to the
-       non-null Meal fields explicitly */
-    const v = this.form.getRawValue();
+       non-null Meal fields explicitly *    
+       *NOTICE* This will be removed 
+       when Either the API is delivered from the backend or we simulate it into meal service*/
+
+    const v = this.mealForm.getRawValue();
 
     const meal: Meal = {
       id: this.isEditMode ? this.mealId : Date.now(),
       image: this.image,
-      stock: this.currentStock,
       name: v.name ?? '',
       category: v.category ?? '',
-      price: v.price,
+      price: Number(v.price),
       description: v.description ?? '',
       calories: v.calories,
       protein: v.protein,
@@ -186,7 +171,7 @@ export class MealFormComponent implements OnInit {
       allergenDairy: v.allergenDairy ?? false,
       allergenFish: v.allergenFish ?? false,
       allergenGluten: v.allergenGluten ?? false,
-      allergenSoy: v.allergenSoy ?? false
+      allergenSoy: v.allergenSoy ?? false,
     };
 
     if (this.isEditMode) {

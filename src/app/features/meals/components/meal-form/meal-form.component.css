@@ -34,14 +34,6 @@
   color: #DE350B;
 }
 
-/* unified message under an empty essential after a save attempt */
-.field-error {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;           /* 12px */
-  font-weight: 400;
-  color: #DE350B;
-}
 
 .nutrition-grid {
   display: grid;

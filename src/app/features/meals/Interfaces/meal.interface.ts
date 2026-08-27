@@ -2,10 +2,10 @@ export interface Meal {
   id: number;
   name: string;
   category: string;
-  price: number | null;
+  price: number;
   description: string;
-  image: string;
-  stock: number | null;
+  image?: string;
+
 
   // nutrition (Figma: Nutritional Breakdown)
   calories?: number | null;

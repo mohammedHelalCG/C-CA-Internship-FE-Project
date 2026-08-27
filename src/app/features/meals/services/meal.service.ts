@@ -13,7 +13,6 @@ export class MealService {
       price: 350,
       description: 'Chicken burger with cheese',
       image: '',
-      stock: 25
     },
     {
       id: 2,
@@ -22,7 +21,6 @@ export class MealService {
       price: 500,
       description: 'Pasta white sauce',
       image: '',
-      stock: 18
     },
     {
       id: 3,
@@ -31,7 +29,6 @@ export class MealService {
       price: 190,
       description: 'caesar salad',
       image: '',
-      stock: 30
     },
     {
       id: 4,
@@ -40,7 +37,6 @@ export class MealService {
       price: 120,
       description: 'French fries with a side of a dip',
       image: '',
-      stock: 0
     }
   ];
 
