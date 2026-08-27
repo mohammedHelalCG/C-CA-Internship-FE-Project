@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Meal } from '../Interfaces/meal.interface';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,6 @@ export class MealService {
       price: 350,
       description: 'Chicken burger with cheese',
       image: '',
-      available: true
     },
     {
       id: 2,
@@ -21,7 +21,6 @@ export class MealService {
       price: 500,
       description: 'Pasta white sauce',
       image: '',
-      available: true
     },
     {
       id: 3,
@@ -30,27 +29,29 @@ export class MealService {
       price: 190,
       description: 'caesar salad',
       image: '',
-      available: true
     },
     {
       id: 4,
       name: 'Fries',
-      category: 'Sides',
+      category: 'Appetizer',
       price: 120,
       description: 'French fries with a side of a dip',
       image: '',
-      available: true
     }
   ];
+
   getMeals(): Meal[] {
     return this.meals;
   }
+
   getMealById(id: number): Meal | undefined {
     return this.meals.find(meal => meal.id === id);
   }
+
   createMeal(meal: Meal): void {
     this.meals.push(meal);
   }
+
   updateMeal(updatedMeal: Meal): void {
     const index = this.meals.findIndex(
       meal => meal.id === updatedMeal.id
@@ -59,6 +60,7 @@ export class MealService {
       this.meals[index] = updatedMeal;
     }
   }
+
   deleteMeal(id: number): void {
     this.meals = this.meals.filter(meal => meal.id !== id);
   }

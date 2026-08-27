@@ -1,86 +1,169 @@
-<div class="meal-form">
+<div class="page">
 
-  <h1>
-    {{ isEditMode ? 'Edit Meal' : 'Create Meal' }}
-  </h1>
+  <p-toast />
 
-  <!-- Meal Name -->
-  <div class="form-field">
-    <label for="name">Meal Name</label>
-
-    <input
-      id="name"
-      type="text"
-      pInputText
-      [(ngModel)]="meal.name"
-      placeholder="Enter meal name"
-    />
+  <div class="page-header">
+    <h1>{{ isEditMode ? 'Edit Meal Details' : 'Add New Gourmet Meal' }}</h1>
+    <p class="subtitle">
+      {{ isEditMode ? `Modify meal parameters and nutritional stats` : `Input high-fidelity meal details for daily
+      reservations` }}
+    </p>
   </div>
 
-  <!-- Category -->
-  <div class="form-field">
-    <label for="category">Category</label>
+  <form class="meal-form" [formGroup]="mealForm">
 
-    <p-select
-      id="category"
-      [options]="categories"
-      [(ngModel)]="meal.category"
-      placeholder="Select category"
-    >
-    </p-select>
+    <!-- LEFT CARD — main details -->
+    <div class="card form-main">
 
-    @if (!meal.category) {
-      <small class="error">
-        Category is required.
-      </small>
-    }
-  </div>
+      <div class="form-field">
+        <label for="name">Meal Name <span class="req">*</span></label>
+        <input id="name" type="text" pInputText formControlName="name" placeholder="e.g. Teriyaki Tofu Bowl"
+          [class.invalid]="mealForm.controls['name'].touched && mealForm.controls['name'].dirty && mealForm.controls['name'].invalid" />
+        @if (mealForm.controls['name'].touched && mealForm.controls['name'].dirty && mealForm.controls['name'].invalid)
+        {
+        <small class="field-error">This field is required.</small>
+        }
+      </div>
 
-  <!-- Price -->
-  <div class="form-field">
-    <label for="price">Price</label>
+      <!-- category + price: essentials row -->
+      <div class="field-row">
+        <div class="form-field">
+          <label>Category <span class="req">*</span></label>
+          <div class="radio-group"
+            [class.invalid]="mealForm.controls['category'].touched && mealForm.controls['category'].dirty && mealForm.controls['category'].invalid">
+            @for (cat of categories; track cat) {
+            <div class="radio-option">
+              <p-radiobutton [inputId]="cat" [value]="cat" formControlName="category" />
+              <label [for]="cat">{{ cat }}</label>
+            </div>
+            }
+          </div>
+          @if (mealForm.controls['category'].touched && mealForm.controls['category'].dirty &&
+          mealForm.controls['category'].invalid) {
+          <small class="field-error">This field is required.</small>
+          }
+        </div>
 
-    <p-inputnumber
-      id="price"
-      [(ngModel)]="meal.price"
-      mode="currency"
-      currency="EGP"
-      locale="en-EG"
-    >
-    </p-inputnumber>
-  </div>
+        <div class="form-field">
+          <label for="price">Price <span class="req">*</span></label>
+          <p-inputnumber id="price" formControlName="price" mode="currency" currency="EGP" locale="en-EG"
+            placeholder="EGP 0.00"
+            [class.invalid]="mealForm.controls['price'].touched && mealForm.controls['price'].dirty && mealForm.controls['price'].invalid" />
+          @if (mealForm.controls['price'].touched && mealForm.controls['price'].dirty && mealForm.controls['price'].invalid) {
+          <small class="field-error">This field is required.</small>
+          }
+        </div>
+      </div>
 
-  <!-- Description -->
-  <div class="form-field">
-    <label for="description">Description</label>
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea id="description" pTextarea formControlName="description"
+          placeholder="Describe the dish components, texture, and serving sides..." rows="3"></textarea>
+      </div>
 
-    <textarea
-      id="description"
-      pTextarea
-      [(ngModel)]="meal.description"
-      placeholder="Enter meal description"
-      rows="5"
-    >
-    </textarea>
-  </div>
+      <div class="form-field">
+        <label for="image">Upload Food Photo</label>
 
-  <!-- Image -->
-  <div class="form-field">
-    <label for="image">Image (Optional)</label>
+        @if (image) {
+        <div class="upload-preview">
+          <img class="upload-thumb" [src]="image" alt="Meal photo" />
+          <div class="upload-info">
+            @if (imageName) {
+            <span class="upload-name">{{ imageName }}</span>
+            }
+            @if (imageMeta) {
+            <span class="upload-meta">{{ imageMeta }}</span>
+            }
+            <label class="upload-replace" for="image">Replace Image</label>
+          </div>
+        </div>
+        } @else {
+        <label class="dropzone" for="image" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+          <i class="pi pi-upload dropzone-icon"></i>
+          <span class="dropzone-text">Drag &amp; drop food image or Browse files</span>
+          <span class="dropzone-hint">PNG, JPG up to 10MB (Recommended 16:9 ratio)</span>
+        </label>
+        }
 
-    <input
-      id="image"
-      type="file"
-      accept="image/*"
-    />
-  </div>
+        <input class="file-input" id="image" type="file" accept="image/*" (change)="onImageSelected($event)" />
+      </div>
 
-  <!-- Save / Update -->
-  <p-button
-    [label]="isEditMode ? 'Update Meal' : 'Save Meal'"
-    (onClick)="saveMeal()"
-    [disabled]="!meal.category"
-  >
-  </p-button>
+    </div>
+
+    <!-- RIGHT COLUMN — nutrition card + actions pinned under it -->
+    <div class="form-right">
+
+      <div class="card form-side">
+
+        <h3>Nutritional Breakdown</h3>
+
+        <div class="nutrition-grid">
+          <div class="form-field">
+            <label for="calories">Calories (kcal)</label>
+            <input id="calories" type="number" pInputText formControlName="calories" placeholder="450" />
+          </div>
+          <div class="form-field">
+            <label for="protein">Protein (g)</label>
+            <input id="protein" type="number" pInputText formControlName="protein" placeholder="24" />
+          </div>
+          <div class="form-field">
+            <label for="carbs">Carbs (g)</label>
+            <input id="carbs" type="number" pInputText formControlName="carbs" placeholder="55" />
+          </div>
+          <div class="form-field">
+            <label for="fat">Fat (g)</label>
+            <input id="fat" type="number" pInputText formControlName="fat" placeholder="12" />
+          </div>
+        </div>
+
+        <h3>Dietary Classifications</h3>
+
+        <div class="checkbox-list">
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="vegetarian" /> Vegetarian
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="vegan" /> Vegan
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="glutenFree" /> Gluten-Free
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="dairyFree" /> Dairy-Free
+          </label>
+        </div>
+
+        <h3>Allergen Triggers</h3>
+
+        <div class="checkbox-row">
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="allergenNuts" /> Nuts
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="allergenDairy" /> Dairy
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="allergenFish" /> Fish
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="allergenGluten" /> Gluten
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" formControlName="allergenSoy" /> Soy
+          </label>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="saveMeal()" [disabled]=" mealForm.invalid">
+          {{ isEditMode ? 'Update Meal' : 'Save Meal' }}
+        </button>
+      </div>
+
+    </div>
+
+  </form>
 
 </div>

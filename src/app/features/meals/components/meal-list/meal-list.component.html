@@ -2,7 +2,9 @@
 
 <div class="meal-list-page">
   <h2>Meals</h2>
-
+<button type="button" class="btn btn-primary" (click)="navToCreate()">
+       Create Meal
+    </button>
   <p-table [value]="meals">
     <ng-template pTemplate="header">
       <tr>
@@ -17,16 +19,22 @@
       <tr>
         <td>{{ meal.name }}</td>
         <td>{{ meal.category }}</td>
-        <td>{{ meal.price | currency:'EGP ' }}</td>
+        <td>{{ meal.price | currency: 'EGP ' }}</td>
         <td>
-          <p-button icon="pi pi-trash" [text]="true" severity="danger"
-                    (onClick)="confirmDelete(meal)" />
+          <p-button
+            icon="pi pi-trash"
+            [text]="true"
+            severity="danger"
+            (onClick)="confirmDelete(meal)"
+          />
         </td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
-      <tr><td colspan="4">No meals found.</td></tr>
+      <tr>
+        <td colspan="4">No meals found.</td>
+      </tr>
     </ng-template>
   </p-table>
 </div>
