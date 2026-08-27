@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 import {HeaderComponent} from "../../../../shared/components/header/header.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meal-list',
@@ -18,6 +19,7 @@ import {HeaderComponent} from "../../../../shared/components/header/header.compo
 export class MealListComponent implements OnInit {
   private mealService = inject(MealService);
   private confirmationService = inject(ConfirmationService);
+  private router = inject(Router);
 
   meals: Meal[] = [];
 
@@ -38,4 +40,10 @@ export class MealListComponent implements OnInit {
     this.mealService.deleteMeal(meal.id);
     this.meals = this.meals.filter(m => m.id !== meal.id);
   }
+
+  navToCreate(): void{
+
+
+    this.router.navigate(['/meals/create'])
+}
 }
