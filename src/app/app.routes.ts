@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'meals',
+    path: 'meal-list',
     loadChildren: () =>
       import('./features/meals/meals.routes')
         .then(m => m.MEALS_ROUTES)
@@ -10,7 +10,7 @@ export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'meals',
+    redirectTo: 'meal-list',
     pathMatch: 'full'
   },
 

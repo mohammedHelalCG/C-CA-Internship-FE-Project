@@ -14,11 +14,12 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button'; // added for button module
+
 
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 import { validate } from '@angular/forms/signals';
-
 @Component({
   selector: 'app-meal-form',
   standalone: true,
@@ -28,7 +29,9 @@ import { validate } from '@angular/forms/signals';
     RadioButtonModule,
     InputNumberModule,
     TextareaModule,
+    ButtonModule,
     ToastModule,
+    
   ],
   providers: [MessageService],
   templateUrl: './meal-form.component.html',
