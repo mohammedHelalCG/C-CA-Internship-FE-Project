@@ -6,12 +6,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
-import {HeaderComponent} from "../../../../shared/components/header/header.component";
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meal-list',
-  imports: [CommonModule, TableModule, ButtonModule, ConfirmDialogModule, HeaderComponent],
+  imports: [CommonModule, TableModule, ButtonModule, ConfirmDialogModule],
   providers: [ConfirmationService],
   templateUrl: './meal-list.component.html',
   styleUrl: './meal-list.component.css'

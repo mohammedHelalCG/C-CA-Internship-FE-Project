@@ -19,8 +19,6 @@ import { ButtonModule } from 'primeng/button'; // added for button module
 
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
-
 import { validate } from '@angular/forms/signals';
 @Component({
   selector: 'app-meal-form',
@@ -33,7 +31,6 @@ import { validate } from '@angular/forms/signals';
     TextareaModule,
     ButtonModule,
     ToastModule,
-    HeaderComponent
     
   ],
   providers: [MessageService],
