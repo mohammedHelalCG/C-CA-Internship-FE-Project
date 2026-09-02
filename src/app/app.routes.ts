@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/login/components/login/login.component';
+import { LoginComponent } from './features/login/components/login/login.component';
 
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: Login
+    loadComponent: () => import('./features/login/components/login/login.component').then(c => c.LoginComponent)
   },
   {
     path: 'meal-list',
@@ -24,5 +24,5 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'meals'
   }
-  
+
 ];

@@ -1,11 +1,90 @@
 <div class="login-page">
-    <div class="login-container">
-        <div class="login-left">
-            <h1>Welcome Back</h1>
-            <p>Sign in to book your gourmet workplace meals.</p>
+
+    <div class="glass-container">
+
+        <div class="form-side">
+
+            <div class="header-area">
+
+                <div class="brand-logo">
+                    <div class="logo-icon">C</div>
+                    <span class="brand-text">CapMeals</span>
+                </div>
+
+                <div class="welcome-texts">
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to book your gourmet workplace meals.</p>
+                </div>
+
+            </div>
+
+            <form class="login-form" (ngSubmit)="onlogin()" [formGroup]="loginForm">
+
+                <div class="form-group">
+                    <label>Corporate Email</label>
+
+                    <div class="input-container">
+                        <input type="email" placeholder="username@capgemini.com" formControlName="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <div class="input-container">
+                        <input type="password" placeholder="••••••••" formControlName="password">
+
+                        <span class="eye-icon">
+                            👁
+                        </span>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </label>
+
+                    <!-- #
+            Forgot password?
+          </a> -->
+
+                </div>
+
+                <button type="submit" class="login-button">
+                    Sign In
+                </button>
+
+                <div class="signup-link">
+                    <span>Don't have an account?</span>
+                    <a href="#">Create Account</a>
+                </div>
+
+            </form>
+
         </div>
-        <div class="login-right img">
-            <img src="../../../../../../images/loginImg.png" alt="Login Image" />
+
+        <!-- RIGHT SIDE -->
+        <div class="presentation-side">
+
+            <div class="quote-card">
+
+                <h3>CapMeals Platform</h3>
+
+                <p>
+                    "The shared meal elevates productivity and corporate culture."
+                </p>
+
+                <div class="quote-footer">
+                    <div class="line"></div>
+                    <div class="circle-icon">○</div>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
 </div>
