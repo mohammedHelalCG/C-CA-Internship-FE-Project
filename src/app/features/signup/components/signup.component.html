@@ -1,3 +1,4 @@
+<p-toast />
 <div class="signup-page">
     <div class="signup-container">
         <div class="signup-banner">
@@ -38,11 +39,11 @@
                 <h2>Create CapMeals Account</h2>
             </div>
 
-            <form class="form-fields">
+            <form class="form-fields" (ngSubmit)="onSignup()" [formGroup]="signupForm">
 
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input id="fullName" type="text" placeholder="John Doe" />
+                    <input id="fullName" type="text" placeholder="John Doe" formControlName="fullName" />
                 </div>
 
                 <div class="form-group">
@@ -50,21 +51,20 @@
                         Employee GGID (Global Grade ID)
                     </label>
 
-                    <input id="ggid" type="text" placeholder="e.g. 1048291" />
+                    <input id="ggid" type="text" placeholder="e.g. 1048291" formControlName="ggid" />
                 </div>
 
                 <div class="form-group">
                     <label for="email">Corporate Email</label>
-
-                    <input id="email" type="email" placeholder="username@capgemini.com" />
+                    <input id="email" type="email" placeholder="username@capgemini.com" formControlName="email" />
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
 
                     <div class="password-field">
-                        <input id="password" type="password" placeholder="At least 8 characters" />
-
+                        <input id="password" type="password" placeholder="At least 8 characters"
+                            formControlName="password" />
                         <i class="pi pi-eye"></i>
                     </div>
                 </div>
@@ -75,8 +75,8 @@
                     </label>
 
                     <div class="password-field">
-                        <input id="confirmPassword" type="password" placeholder="Repeat your password" />
-
+                        <input id="confirmPassword" type="password" placeholder="Repeat your password"
+                            formControlName="confirmPassword" />
                         <i class="pi pi-eye"></i>
                     </div>
                 </div>
@@ -91,6 +91,7 @@
                 <span>Already have an account?</span>
 
                 <a routerLink="/login">
+                    <!-- wont work till we merge -->
                     Sign In
                 </a>
             </div>
