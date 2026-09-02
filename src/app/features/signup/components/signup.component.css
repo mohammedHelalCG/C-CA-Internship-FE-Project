@@ -79,7 +79,6 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* RIGHT SIDE */
 
 .signup-form-side {
     flex: 1;
@@ -91,7 +90,6 @@
     justify-content: center;
 }
 
-/* LOGO */
 
 .brand-logo {
     display: flex;
@@ -149,7 +147,6 @@
     font-weight: 800;
 }
 
-/* FORM */
 
 .form-fields {
     display: flex;
