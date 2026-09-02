@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
+import { SignupComponent } from './features/signup/components/signup.component';
 
 export const routes: Routes = [
+  {
+    path: 'signup',
+    loadComponent: () => import('./features/signup/components/signup.component').then(c => c.SignupComponent)
+  },
   {
     path: 'meal-list',
     loadChildren: () =>
