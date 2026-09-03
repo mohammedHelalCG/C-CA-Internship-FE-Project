@@ -1,0 +1,28 @@
+<p-card class="max-w-sm w-full overflow-hidden">
+  <ng-template #header>
+    <div class="img-container">
+      <img [src]="image" />
+    </div>
+  </ng-template>
+  <ng-template #title>
+    <!-- <span class="font-bold text-xl">{{title}}</span> -->
+    <span class="font-bold text-xl">Card Title</span>
+  </ng-template>
+
+  <ng-template #subtitle>
+    <div class="space-y-4">
+      <p>{{ description }}</p>
+    </div>
+    <div class="flex items-center gap-2">
+      @for (tag of tags; track $index) {
+        <p-tag severity="info" [value]="tag.name" />
+      }
+    </div>
+  </ng-template>
+
+  <ng-template #footer>
+    <div class="flex items-center gap-2 mt-4">
+      <button type="button" class="btn btn-secondary">View Details</button>
+    </div>
+  </ng-template>
+</p-card>
