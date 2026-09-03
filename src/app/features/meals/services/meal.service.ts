@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class MealService {
   private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/';
-  private apiUrl = 'meals/';
-  constructor(private http: HttpClient) {}
+  private apiUrl = 'meals';
+  constructor(private http: HttpClient) { }
 
   getAllMeals(): Observable<Meal[]> {
     return this.http.get<Meal[]>(this.baseUrl + this.apiUrl);
