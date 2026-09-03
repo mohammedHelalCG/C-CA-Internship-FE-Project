@@ -27,19 +27,19 @@ export class LoginComponent {
   onlogin() {
     if (this.loginForm.valid) {
       const isAuthenticated = this.loginService.authenticate(this.loginForm.value.email, this.loginForm.value.password);
-      // if (isAuthenticated) {
-      //   this.messageService.add({
-      //     severity: 'success',
-      //     summary: 'Login successful',
-      //     detail: 'Welcome back to CapMeals.',
-      //   });
-      // } else {
-      //   this.messageService.add({
-      //     severity: 'error',
-      //     summary: 'Invalid credentials',
-      //     detail: 'The email or password you entered is incorrect.',
-      //   });
-      // }
+      if (isAuthenticated) {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Login successful',
+          detail: 'Welcome back to CapMeals.',
+        });
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Invalid credentials',
+          detail: 'The email or password you entered is incorrect.',
+        });
+      }
       return;
     }
 

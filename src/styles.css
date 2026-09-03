@@ -1,5 +1,7 @@
 /* CapMeals — global styles */
 @import 'primeicons/primeicons.css';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -8,7 +10,7 @@
 }
 
 body {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 1rem;
   /* 16px */
   line-height: 1.5;
