@@ -7,26 +7,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MealService {
-  private apiUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/meals';
+  private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/';
+  private apiUrl = 'meals/';
   constructor(private http: HttpClient) {}
 
   getAllMeals(): Observable<Meal[]> {
-    return this.http.get<Meal[]>(this.apiUrl);
+    return this.http.get<Meal[]>(this.baseUrl + this.apiUrl);
   }
 
   getMealById(id: number): Observable<Meal> {
-    return this.http.get<Meal>(`${this.apiUrl}/${id}`);
+    return this.http.get<Meal>(this.baseUrl + this.apiUrl + id);
   }
 
   createMeal(meal: Meal): Observable<Meal> {
-    return this.http.post<Meal>(this.apiUrl, meal);
+    return this.http.post<Meal>(this.baseUrl + this.apiUrl, meal);
   }
 
   updateMeal(id: number, updatedMeal: Meal): Observable<Meal> {
-    return this.http.put<Meal>(`${this.apiUrl}/${id}`, updatedMeal);
+    return this.http.put<Meal>(this.baseUrl + this.apiUrl, updatedMeal);
   }
 
   deleteMeal(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(this.baseUrl + this.apiUrl + id);
   }
 }
