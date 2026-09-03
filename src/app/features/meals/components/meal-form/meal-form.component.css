@@ -3,15 +3,15 @@
 
 .meal-form {
   display: grid;
-  grid-template-columns: 1fr 33.75rem;   /* 540px */
-  gap: 2rem;                    /* 32px */
+  grid-template-columns: 1fr 33.75rem; /* 540px */
+  gap: 2rem; /* 32px */
 }
 
 .form-main,
 .form-side {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;                  /* 24px */
+  gap: 1.5rem; /* 24px */
 }
 
 /* right column: nutrition card with the actions pinned under it,
@@ -19,7 +19,7 @@
 .form-right {
   display: flex;
   flex-direction: column;
-  gap: 2rem;                    /* 32px */
+  gap: 2rem; /* 32px */
 }
 
 /* category hugs its radios; price takes the rest */
@@ -31,35 +31,34 @@
 
 /* required-field marker on labels */
 .req {
-  color: #DE350B;
+  color: #de350b;
 }
-
 
 .nutrition-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem 1.5rem;             /* 16px 24px */
+  gap: 1rem 1.5rem; /* 16px 24px */
 }
 
 /* photo dropzone */
 .dropzone {
   display: block;
-  padding: 2rem;                /* 32px */
+  padding: 2rem; /* 32px */
   text-align: center;
-  background: #F3F5F9;
-  border: 1px dashed #D1D6E0;
+  background: #f3f5f9;
+  border: 1px dashed #d1d6e0;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .dropzone.invalid {
-  border-color: #DE350B;
+  border-color: #de350b;
 }
 
 .dropzone-icon {
   display: block;
-  margin: 0 auto 0.75rem;       /* 12px */
-  font-size: 1.5rem;            /* 24px */
+  margin: 0 auto 0.75rem; /* 12px */
+  font-size: 1.5rem; /* 24px */
   color: #232930;
 }
 
@@ -67,15 +66,15 @@
   display: block;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #0070AD;
+  color: #0070ad;
 }
 
 .dropzone-hint {
   display: block;
   margin-top: 0.5rem;
-  font-size: 0.75rem;           /* 12px */
+  font-size: 0.75rem; /* 12px */
   font-weight: 400;
-  color: #5B6770;
+  color: #5b6770;
 }
 
 /* after-upload state: thumbnail + file info + replace link */
@@ -84,14 +83,14 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem;
-  background: #FFFFFF;
-  border: 1px solid #0070AD;
+  background: #ffffff;
+  border: 1px solid #0070ad;
   border-radius: 8px;
 }
 
 .upload-thumb {
-  width: 12rem;                 /* 192px */
-  height: 6.75rem;              /* 108px, 16:9 */
+  width: 12rem; /* 192px */
+  height: 6.75rem; /* 108px, 16:9 */
   object-fit: cover;
   border-radius: 4px;
 }
@@ -99,7 +98,7 @@
 .upload-info {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;                 /* 4px */
+  gap: 0.25rem; /* 4px */
 }
 
 .upload-name {
@@ -109,14 +108,14 @@
 
 .upload-meta {
   font-size: 0.75rem;
-  color: #5B6770;
+  color: #5b6770;
 }
 
 .upload-replace {
   margin: 0.25rem 0 0;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #0070AD;
+  color: #0070ad;
   cursor: pointer;
 }
 
@@ -129,7 +128,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  height: 2.75rem;              /* 44px */
+  height: 2.75rem; /* 44px */
 }
 
 .radio-option {
@@ -150,7 +149,7 @@
 .checkbox-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;                 /* 12px */
+  gap: 0.75rem; /* 12px */
 }
 
 .checkbox-row {
@@ -176,7 +175,7 @@
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;                 /* 12px */
-  margin-top: auto;             /* pins the row to the column's bottom,
+  gap: 0.75rem; /* 12px */
+  margin-top: auto; /* pins the row to the column's bottom,
                                    level with the left card's bottom edge */
 }

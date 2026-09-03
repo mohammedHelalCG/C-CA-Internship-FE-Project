@@ -1,0 +1,38 @@
+p-card {
+  border-radius: 16px;
+}
+
+/* ---------- ImageOverlay (the #header ng-template wrapper) ---------- */
+.img-container {
+  min-height: 220px;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px 16px 0 0;
+  object-fit: cover;
+}
+
+/* ---------- Description text (default content slot) ---------- */
+.space-y-4 p {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #5b6770;
+  margin: 0;
+
+  /* clamp to 2 lines, matching the "..." truncation in the design */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+.btn-secondary {
+  width: 100%;
+}

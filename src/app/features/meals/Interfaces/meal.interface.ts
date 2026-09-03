@@ -6,6 +6,8 @@ export interface Meal {
   description: string;
   image?: string;
 
+  dietaryClassification?: DIETARY_CLASSIFICATION;
+  
 
   // nutrition (Figma: Nutritional Breakdown)
   calories?: number | null;
@@ -13,16 +15,18 @@ export interface Meal {
   carbs?: number | null;
   fat?: number | null;
 
-  // dietary classifications
-  vegetarian?: boolean;
-  vegan?: boolean;
-  glutenFree?: boolean;
-  dairyFree?: boolean;
-
   // allergen triggers
   allergenNuts?: boolean;
   allergenDairy?: boolean;
   allergenFish?: boolean;
   allergenGluten?: boolean;
   allergenSoy?: boolean;
+}
+
+export enum DIETARY_CLASSIFICATION{  
+  // dietary classifications
+  vegetarian = 1,
+  vegan = 2,
+  glutenFree = 3,
+  dairyFree  = 4,
 }

@@ -15,7 +15,7 @@ body {
   /* 16px */
   line-height: 1.5;
   color: #232930;
-  background-color: #F3F5F9;
+  background-color: #f3f5f9;
   min-height: 100vh;
 }
 
@@ -42,7 +42,7 @@ h3 {
 /* 16px */
 
 a {
-  color: #0070AD;
+  color: #0070ad;
   text-decoration: none;
   font-weight: 600;
 }
@@ -75,23 +75,23 @@ button {
 }
 
 .btn-primary {
-  background: #0070AD;
-  color: #FFFFFF;
+  background: #0070ad;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-  background: #005A8C;
+  background: #005a8c;
 }
 
 .btn-outline {
-  background: #FFFFFF;
-  border: 1px solid #D1D6E0;
+  background: #ffffff;
+  border: 1px solid #d1d6e0;
   color: #232930;
 }
 
 .btn-danger {
-  background: #DE350B;
-  color: #FFFFFF;
+  background: #de350b;
+  color: #ffffff;
 }
 
 .btn:disabled {
@@ -99,9 +99,14 @@ button {
   cursor: not-allowed;
 }
 
+.btn-secondary {
+  background-color: #e6f4fa;
+  color: #0070ad;
+}
+
 /* white rounded card every screen uses */
 .card {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 16px;
   padding: 2.5rem;
   /* 40px */
@@ -127,7 +132,7 @@ button {
   margin-top: 0.5rem;
   font-size: 0.875rem;
   /* 14px */
-  color: #5B6770;
+  color: #5b6770;
 }
 
 /* form elements — identical on every screen */
@@ -150,8 +155,8 @@ select {
   font: inherit;
   font-size: 0.875rem;
   /* 14px */
-  background: #FFFFFF;
-  border: 1px solid #D1D6E0;
+  background: #ffffff;
+  border: 1px solid #d1d6e0;
   border-radius: 8px;
 }
 
@@ -164,22 +169,22 @@ textarea {
   font: inherit;
   font-size: 0.875rem;
   /* 14px */
-  background: #FFFFFF;
-  border: 1px solid #D1D6E0;
+  background: #ffffff;
+  border: 1px solid #d1d6e0;
   border-radius: 8px;
   resize: vertical;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #5B6770;
+  color: #5b6770;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #0070AD;
+  border-color: #0070ad;
   box-shadow: 0 0 0 3px rgba(0, 112, 173, 0.25);
 }
 
@@ -188,17 +193,16 @@ input[type='radio'] {
   width: 1.125rem;
   /* 18px */
   height: 1.125rem;
-  accent-color: #0070AD;
+  accent-color: #0070ad;
   cursor: pointer;
 }
-
 
 /* PrimeNG controls — match the native form look above */
 .p-inputtext {
   width: 100%;
   font-size: 0.875rem;
   /* 14px */
-  border: 1px solid #D1D6E0;
+  border: 1px solid #d1d6e0;
   border-radius: 8px;
 }
 
@@ -221,48 +225,48 @@ textarea.p-textarea {
   height: 2.75rem;
   /* 44px */
   align-items: center;
-  background: #FFFFFF;
-  border: 1px solid #D1D6E0;
+  background: #ffffff;
+  border: 1px solid #d1d6e0;
   border-radius: 8px;
 }
 
 .p-select .p-select-label.p-placeholder {
-  color: #5B6770;
+  color: #5b6770;
 }
 
 input.p-inputtext:enabled:hover,
 textarea.p-textarea:enabled:hover {
-  border-color: #D1D6E0;
+  border-color: #d1d6e0;
 }
 
 input.p-inputtext:enabled:focus,
 textarea.p-textarea:enabled:focus,
 .p-select.p-focus {
   outline: none;
-  border-color: #0070AD;
+  border-color: #0070ad;
   box-shadow: 0 0 0 3px rgba(0, 112, 173, 0.25);
 }
 
 .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
-  background: #0070AD;
-  border-color: #0070AD;
+  background: #0070ad;
+  border-color: #0070ad;
 }
 
 /* toast — styled like the design's alert panels */
 .p-toast .p-toast-message {
   border: none;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .p-toast .p-toast-message-error {
-  background: #FFEBE6;
-  color: #DE350B;
+  background: #ffebe6;
+  color: #de350b;
 }
 
 .p-toast .p-toast-message-error .p-toast-message-icon,
 .p-toast .p-toast-message-error .p-toast-close-button {
-  color: #DE350B;
+  color: #de350b;
 }
 
 .p-toast .p-toast-summary {
@@ -274,21 +278,21 @@ textarea.p-textarea:enabled:focus,
 .p-toast .p-toast-detail {
   font-size: 0.875rem;
   font-weight: 400;
-  color: #5B6770;
+  color: #5b6770;
 }
 
 /* required fields left empty after a save attempt turn red */
 input.invalid,
 input.p-inputtext.invalid {
-  border-color: #DE350B;
+  border-color: #de350b;
 }
 
 .p-inputnumber.invalid .p-inputtext {
-  border-color: #DE350B;
+  border-color: #de350b;
 }
 
 .radio-group.invalid .p-radiobutton-box {
-  border-color: #DE350B;
+  border-color: #de350b;
 }
 
 /* unified message under an empty essential after a save attempt */
@@ -298,5 +302,5 @@ input.p-inputtext.invalid {
   font-size: 0.75rem;
   /* 12px */
   font-weight: 400;
-  color: #DE350B;
+  color: #de350b;
 }

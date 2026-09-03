@@ -1,67 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Meal } from '../Interfaces/meal.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MealService {
-  private meals: Meal[] = [
-    {
-      id: 1,
-      name: 'Chicken Burger',
-      category: 'Main Course',
-      price: 350,
-      description: 'Chicken burger with cheese',
-      image: '',
-    },
-    {
-      id: 2,
-      name: 'Pasta Alfredo',
-      category: 'Main Course',
-      price: 500,
-      description: 'Pasta white sauce',
-      image: '',
-    },
-    {
-      id: 3,
-      name: 'Salad',
-      category: 'Appetizer',
-      price: 190,
-      description: 'caesar salad',
-      image: '',
-    },
-    {
-      id: 4,
-      name: 'Fries',
-      category: 'Appetizer',
-      price: 120,
-      description: 'French fries with a side of a dip',
-      image: '',
-    }
-  ];
+  private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/';
+  private apiUrl = 'meals/';
+  constructor(private http: HttpClient) {}
 
-  getMeals(): Meal[] {
-    return this.meals;
+  getAllMeals(): Observable<Meal[]> {
+    return this.http.get<Meal[]>(this.baseUrl + this.apiUrl);
   }
 
-  getMealById(id: number): Meal | undefined {
-    return this.meals.find(meal => meal.id === id);
+  getMealById(id: number): Observable<Meal> {
+    return this.http.get<Meal>(this.baseUrl + this.apiUrl + id);
   }
 
-  createMeal(meal: Meal): void {
-    this.meals.push(meal);
+  createMeal(meal: Meal): Observable<Meal> {
+    return this.http.post<Meal>(this.baseUrl + this.apiUrl, meal);
   }
 
-  updateMeal(updatedMeal: Meal): void {
-    const index = this.meals.findIndex(
-      meal => meal.id === updatedMeal.id
-    );
-    if (index !== -1) {
-      this.meals[index] = updatedMeal;
-    }
+  updateMeal(id: number, updatedMeal: Meal): Observable<Meal> {
+    return this.http.put<Meal>(this.baseUrl + this.apiUrl, updatedMeal);
   }
 
-  deleteMeal(id: number): void {
-    this.meals = this.meals.filter(meal => meal.id !== id);
+  deleteMeal(id: number): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + this.apiUrl + id);
   }
 }

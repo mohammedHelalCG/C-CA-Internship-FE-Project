@@ -1,40 +1,70 @@
 <p-confirmDialog />
 
-<div class="meal-list-page">
-  <h2>Meals</h2>
-<button type="button" class="btn btn-primary" (click)="navToCreate()">
-       Create Meal
+<div class="meal-list-container">
+  <!-- Search and Filter Bar Section -->
+  <div class="filter-bar">
+    <div class="filter-options">
+      <div class="filteration">
+        <div class="search">
+          <p-iconfield iconPosition="left">
+            <input type="text" pInputText placeholder="Search" />
+          </p-iconfield>
+        </div>
+        <div class="dropdown">
+          <p-select
+            [options]="dietaryFilter"
+            [(ngModel)]="selectedDietary"
+            optionLabel="label"
+            [filter]="true"
+            filterBy="label"
+            [checkmark]="true"
+            placeholder="Select Dietary"
+            class="w-full md:w-56"
+            [pt]="{ option: { class: 'flex-row-reverse justify-between' } }"
+          >
+            <ng-template #selectedItem let-selectedOption>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                  [class]="'flag flag-' + selectedOption.code"
+                  style="width: 18px; height: 12px"
+                />
+                <span>{{ selectedOption.label }}</span>
+              </div>
+            </ng-template>
+            <ng-template let-language #item>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                  [class]="'flag flag-' + language.code"
+                  style="width: 18px; height: 12px"
+                />
+                <span>{{ language.label }}</span>
+              </div>
+            </ng-template>
+          </p-select>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn-create-meal" (click)="navToCreate()">
+      <span class="plus-icon">+</span> Create Meal
     </button>
-  <p-table [value]="meals">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th style="width: 6rem"></th>
-      </tr>
-    </ng-template>
 
-    <ng-template pTemplate="body" let-meal>
-      <tr>
-        <td>{{ meal.name }}</td>
-        <td>{{ meal.category }}</td>
-        <td>{{ meal.price | currency: 'EGP ' }}</td>
-        <td>
-          <p-button
-            icon="pi pi-trash"
-            [text]="true"
-            severity="danger"
-            (onClick)="confirmDelete(meal)"
-          />
-        </td>
-      </tr>
-    </ng-template>
-
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="4">No meals found.</td>
-      </tr>
-    </ng-template>
-  </p-table>
+    <!-- Responsive Cards Grid -->
+  </div>
+  <div class="meals-grid">
+    @for (meal of meals; track $index) {
+      <div class="grid-item">
+        <app-card
+          [title]="meal.name"
+          [description]="meal.description"
+          [image]="meal.image"
+          [tags]="getMealClassification(meal?.dietaryClassification)"
+          (delete)="confirmDelete(meal)"
+        >
+        </app-card>
+      </div>
+    }
+  </div>
 </div>
