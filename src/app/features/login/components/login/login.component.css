@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 .login-page {
     min-height: 100vh;
 
@@ -88,10 +90,9 @@
 }
 
 .welcome-texts h1 {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 550;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
     font-size: 1.75rem;
-    /* 28px */
     line-height: 1;
     letter-spacing: -0.02em;
 
