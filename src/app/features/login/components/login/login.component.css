@@ -1,0 +1,351 @@
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background: linear-gradient(90deg,
+            #fdfbf7 0%,
+            #e3eef9 50%,
+            #d1e4f5 100%);
+
+    padding: 40px;
+}
+
+
+.glass-container {
+    width: auto;
+    height: auto;
+
+    display: flex;
+
+    background: rgba(255, 255, 255, 0.3);
+
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+
+    backdrop-filter: blur(16px);
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    box-shadow: 0 16px 40px rgba(0, 64, 128, 0.07);
+}
+
+/* LEFT */
+
+.form-side {
+    width: 530px;
+    padding: 56px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Logo */
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #0070ad;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.brand-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 550;
+    color: #0070ad;
+}
+
+/* Header */
+
+.header-area {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 60px;
+
+}
+
+.welcome-texts h1 {
+    font-weight: 800;
+    font-size: 1.75rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+
+    color: #232930;
+    margin: 0;
+}
+
+.welcome-texts p {
+    margin-top: 8px;
+
+    color: #5b6770;
+
+    font-size: 14px;
+}
+
+/* Form */
+
+.login-form {
+    width: 418px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #232930;
+}
+
+/* Inputs */
+
+.input-container {
+    width: 418px;
+    height: 48px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 20px;
+}
+
+.input-container input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #5b6770;
+
+    font-size: 14px;
+}
+
+.eye-icon {
+    color: #5b6770;
+    cursor: pointer;
+}
+
+/* Remember Row */
+
+.actions-row {
+    width: 418px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 4px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    color: #5b6770;
+}
+
+.remember-me input {
+    width: 18px;
+    height: 18px;
+}
+
+.forgot-password {
+    text-decoration: none;
+
+    color: #0070ad;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Button */
+
+.login-button {
+    width: 418px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    background: #0070ad;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #005e91;
+}
+
+/* Signup */
+
+.signup-link {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: 13px;
+}
+
+.signup-link span {
+    color: #5b6770;
+}
+
+.signup-link a {
+    text-decoration: none;
+
+    color: #0070ad;
+
+    font-weight: 700;
+}
+
+/* RIGHT SECTION */
+
+.presentation-side {
+    width: 530px;
+
+    padding: 48px;
+
+    display: flex;
+    align-items: flex-start;
+
+    background:
+        linear-gradient(rgba(255, 255, 255, .15),
+            rgba(255, 255, 255, .15)),
+        url('../../../../../../public/images/loginImg.png');
+
+    background-size: cover;
+    background-position: center;
+}
+
+/* Quote Card */
+
+.quote-card {
+    width: 434px;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    border: 1.5px solid #ffffff;
+
+    backdrop-filter: blur(8px);
+
+    border-radius: 24px;
+
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.quote-card h3 {
+    color: #0070ad;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.quote-card p {
+    color: #232930;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    font-weight: 500;
+}
+
+.quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line {
+    width: 40px;
+    height: 2px;
+    background: #0070ad;
+}
+
+.circle-icon {
+    color: #0070ad;
+    font-size: 20px;
+}
+
+/* Footer */
+
+.footer-text {
+    margin-top: 24px;
+
+    font-size: 11px;
+
+    color: #5b6770;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+
+    .glass-container {
+        width: 100%;
+        max-width: 1060px;
+        height: auto;
+
+        flex-direction: column;
+    }
+
+    .form-side,
+    .presentation-side {
+        width: 100%;
+    }
+
+    .login-form,
+    .input-container,
+    .login-button {
+        width: 100%;
+    }
+}

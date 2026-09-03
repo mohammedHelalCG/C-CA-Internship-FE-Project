@@ -1,5 +1,7 @@
 /* CapMeals — global styles */
 @import 'primeicons/primeicons.css';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -8,8 +10,9 @@
 }
 
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 1rem; /* 16px */
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  /* 16px */
   line-height: 1.5;
   color: #232930;
   background-color: #f3f5f9;
@@ -20,23 +23,30 @@ h1 {
   font-size: 1.75rem;
   font-weight: 800;
   line-height: 1;
-} /* 28px */
+}
+
+/* 28px */
 h2 {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.2;
-} /* 18px */
+}
+
+/* 18px */
 h3 {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-} /* 16px */
+}
+
+/* 16px */
 
 a {
   color: #0070ad;
   text-decoration: none;
   font-weight: 600;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -53,11 +63,14 @@ button {
 
 /* buttons share height, padding, font — width is set where used */
 .btn {
-  height: 2.75rem; /* 44px */
-  padding: 0 1.5rem; /* 24px */
+  height: 2.75rem;
+  /* 44px */
+  padding: 0 1.5rem;
+  /* 24px */
   border: none;
   border-radius: 8px;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   font-weight: 700;
 }
 
@@ -65,6 +78,7 @@ button {
   background: #0070ad;
   color: #ffffff;
 }
+
 .btn-primary:hover {
   background: #005a8c;
 }
@@ -84,6 +98,7 @@ button {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
 .btn-secondary {
   background-color: #e6f4fa;
   color: #0070ad;
@@ -93,13 +108,15 @@ button {
 .card {
   background: #ffffff;
   border-radius: 16px;
-  padding: 2.5rem; /* 40px */
+  padding: 2.5rem;
+  /* 40px */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 /* every routed page: same frame and title block */
 .page {
-  max-width: 90rem; /* 1440px */
+  max-width: 90rem;
+  /* 1440px */
   margin: 0 auto;
   /* design says 3rem top, measured below the app header;
      extra until the header exists — revert to 3rem then instead of the 4.5rem */
@@ -107,30 +124,37 @@ button {
 }
 
 .page-header {
-  margin-bottom: 2rem; /* 32px */
+  margin-bottom: 2rem;
+  /* 32px */
 }
 
 .page-header .subtitle {
   margin-top: 0.5rem;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   color: #5b6770;
 }
 
 /* form elements — identical on every screen */
 label {
   display: block;
-  font-size: 0.8125rem; /* 13px */
+  font-size: 0.8125rem;
+  /* 13px */
   font-weight: 600;
-  margin-bottom: 0.5rem; /* 8px */
+  margin-bottom: 0.5rem;
+  /* 8px */
 }
 
 input,
 select {
   width: 100%;
-  height: 2.75rem; /* 44px */
-  padding: 0 1rem; /* 16px */
+  height: 2.75rem;
+  /* 44px */
+  padding: 0 1rem;
+  /* 16px */
   font: inherit;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   background: #ffffff;
   border: 1px solid #d1d6e0;
   border-radius: 8px;
@@ -138,10 +162,13 @@ select {
 
 textarea {
   width: 100%;
-  min-height: 6rem; /* 96px */
-  padding: 0.75rem 1rem; /* 12px 16px */
+  min-height: 6rem;
+  /* 96px */
+  padding: 0.75rem 1rem;
+  /* 12px 16px */
   font: inherit;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   background: #ffffff;
   border: 1px solid #d1d6e0;
   border-radius: 8px;
@@ -163,7 +190,8 @@ select:focus {
 
 input[type='checkbox'],
 input[type='radio'] {
-  width: 1.125rem; /* 18px */
+  width: 1.125rem;
+  /* 18px */
   height: 1.125rem;
   accent-color: #0070ad;
   cursor: pointer;
@@ -172,13 +200,15 @@ input[type='radio'] {
 /* PrimeNG controls — match the native form look above */
 .p-inputtext {
   width: 100%;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   border: 1px solid #d1d6e0;
   border-radius: 8px;
 }
 
 input.p-inputtext {
-  height: 2.75rem; /* 44px */
+  height: 2.75rem;
+  /* 44px */
   padding: 0 1rem;
 }
 
@@ -192,7 +222,8 @@ textarea.p-textarea {
 }
 
 .p-select {
-  height: 2.75rem; /* 44px */
+  height: 2.75rem;
+  /* 44px */
   align-items: center;
   background: #ffffff;
   border: 1px solid #d1d6e0;
@@ -239,7 +270,8 @@ textarea.p-textarea:enabled:focus,
 }
 
 .p-toast .p-toast-summary {
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   font-weight: 700;
 }
 
@@ -267,7 +299,8 @@ input.p-inputtext.invalid {
 .field-error {
   display: block;
   margin-top: 0.5rem;
-  font-size: 0.75rem; /* 12px */
+  font-size: 0.75rem;
+  /* 12px */
   font-weight: 400;
   color: #de350b;
 }
