@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, WritableSignal, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -14,6 +14,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
+import { catchError, finalize, of } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface FilterModel {
   label: string;
@@ -38,12 +40,24 @@ interface FilterModel {
   templateUrl: './meal-list.component.html',
   styleUrl: './meal-list.component.css',
 })
-export class MealListComponent implements OnInit {
+export class MealListComponent {
   private mealService = inject(MealService);
   private confirmationService = inject(ConfirmationService);
   private router = inject(Router);
 
-  meals: Meal[] = [];
+  readonly isLoading = signal(true);
+  readonly loadError = signal<string | null>(null);
+
+  readonly meals = toSignal(
+    this.mealService.getAllMeals().pipe(
+      catchError(() => {
+        this.loadError.set('Unable to load meals.');
+        return of([]);
+      }),
+      finalize(() => this.isLoading.set(false)),
+    ),
+    { initialValue: [] },
+  );
 
   selectedDietary: FilterModel | undefined;
 
@@ -54,11 +68,6 @@ export class MealListComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {
-    this.mealService.getAllMeals().subscribe((meals) => {
-      this.meals = meals;
-    });
-  }
   getMealClassification(dc: number | undefined): Tags[] {
     switch (dc) {
       case 1:
@@ -117,8 +126,8 @@ export class MealListComponent implements OnInit {
   }
 
   private deleteMeal(meal: Meal): void {
-    this.mealService.deleteMeal(meal.id);
-    this.meals = this.meals.filter((m) => m.id !== meal.id);
+    // this.mealService.deleteMeal(meal.id);
+    // this.meals = this.meals.filter((m) => m.id !== meal.id);
   }
 
   navToCreate(): void {

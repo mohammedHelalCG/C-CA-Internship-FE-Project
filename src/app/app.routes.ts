@@ -6,28 +6,27 @@ import { SignupComponent } from './features/signup/components/signup.component';
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./features/login/components/login/login.component').then(c => c.LoginComponent)
+    loadComponent: () =>
+      import('./features/login/components/login/login.component').then((c) => c.LoginComponent),
   },
   {
     path: 'signup',
-    loadComponent: () => import('./features/signup/components/signup.component').then(c => c.SignupComponent)
+    loadComponent: () =>
+      import('./features/signup/components/signup.component').then((c) => c.SignupComponent),
   },
   {
     path: 'meal-list',
-    loadChildren: () =>
-      import('./features/meals/meals.routes')
-        .then(m => m.MEALS_ROUTES)
+    loadChildren: () => import('./features/meals/meals.routes').then((m) => m.MEALS_ROUTES),
   },
 
   {
     path: '',
     redirectTo: 'meal-list',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 
   {
     path: '**',
-    redirectTo: 'meals'
-  }
-
+    redirectTo: 'meals',
+  },
 ];

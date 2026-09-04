@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Meal } from '../Interfaces/meal.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,14 +9,15 @@ import { Observable } from 'rxjs';
 export class MealService {
   private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/';
   private apiUrl = 'meals';
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {}
 
   getAllMeals(): Observable<Meal[]> {
     return this.http.get<Meal[]>(this.baseUrl + this.apiUrl);
   }
 
   getMealById(id: number): Observable<Meal> {
-    return this.http.get<Meal>(this.baseUrl + this.apiUrl + id);
+    return this.http.get<Meal>(`${this.baseUrl + this.apiUrl}/${id}`);
   }
 
   createMeal(meal: Meal): Observable<Meal> {
@@ -24,10 +25,10 @@ export class MealService {
   }
 
   updateMeal(id: number, updatedMeal: Meal): Observable<Meal> {
-    return this.http.put<Meal>(this.baseUrl + this.apiUrl, updatedMeal);
+    return this.http.put<Meal>(`${this.baseUrl + this.apiUrl}/${id}`, updatedMeal);
   }
 
   deleteMeal(id: number): Observable<void> {
-    return this.http.delete<void>(this.baseUrl + this.apiUrl + id);
+    return this.http.delete<void>(`${this.baseUrl + this.apiUrl}/${id}`);
   }
 }

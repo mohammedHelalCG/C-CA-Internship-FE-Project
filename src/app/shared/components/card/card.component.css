@@ -5,6 +5,9 @@ p-card {
 /* ---------- ImageOverlay (the #header ng-template wrapper) ---------- */
 .img-container {
   min-height: 220px;
+  max-height: 220px;
+  overflow: hidden;
+  position: relative;
 }
 
 .img-container img {
@@ -12,6 +15,7 @@ p-card {
   height: 100%;
   border-radius: 16px 16px 0 0;
   object-fit: cover;
+  position: absolute;
 }
 
 /* ---------- Description text (default content slot) ---------- */

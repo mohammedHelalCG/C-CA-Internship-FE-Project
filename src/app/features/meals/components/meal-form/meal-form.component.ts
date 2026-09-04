@@ -16,7 +16,6 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button'; // added for button module
 
-
 import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 import { validate } from '@angular/forms/signals';
@@ -31,7 +30,6 @@ import { validate } from '@angular/forms/signals';
     TextareaModule,
     ButtonModule,
     ToastModule,
-
   ],
   providers: [MessageService],
   templateUrl: './meal-form.component.html',
@@ -71,10 +69,11 @@ export class MealFormComponent implements OnInit {
     private mealService: MealService,
     private cdr: ChangeDetectorRef,
     private messageService: MessageService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    this.isEditMode = false;
 
     // if (id) {
     //   this.isEditMode = true;
@@ -153,7 +152,7 @@ export class MealFormComponent implements OnInit {
 
     const meal: Meal = {
       id: this.isEditMode ? this.mealId : Date.now(),
-      image: this.image,
+      imageUrl: this.image,
       name: v.name ?? '',
       category: v.category ?? '',
       price: Number(v.price),

@@ -54,17 +54,23 @@
     <!-- Responsive Cards Grid -->
   </div>
   <div class="meals-grid">
-    @for (meal of meals; track $index) {
-      <div class="grid-item">
-        <app-card
-          [title]="meal.name"
-          [description]="meal.description"
-          [image]="meal.image"
-          [tags]="getMealClassification(meal?.dietaryClassification)"
-          (delete)="confirmDelete(meal)"
-        >
-        </app-card>
-      </div>
+    @if (isLoading()) {
+      <p class="loader">Meals loading...</p>
+    } @else if (loadError()) {
+      <p>{{ loadError() }}</p>
+    } @else {
+      @for (meal of meals(); track meal.id) {
+        <div class="grid-item">
+          <app-card
+            [title]="meal.name"
+            [description]="meal.description"
+            [image]="meal.imageUrl === '' ? `/images/FoodImage.png` : meal.imageUrl"
+            [tags]="getMealClassification(meal?.dietaryClassification)"
+            (delete)="confirmDelete(meal)"
+          >
+          </app-card>
+        </div>
+      }
     }
   </div>
 </div>

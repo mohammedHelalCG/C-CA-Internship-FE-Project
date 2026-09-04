@@ -4,10 +4,9 @@ export interface Meal {
   category: string;
   price: number;
   description: string;
-  image?: string;
+  imageUrl?: string;
 
   dietaryClassification?: DIETARY_CLASSIFICATION;
-  
 
   // nutrition (Figma: Nutritional Breakdown)
   calories?: number | null;
@@ -23,10 +22,10 @@ export interface Meal {
   allergenSoy?: boolean;
 }
 
-export enum DIETARY_CLASSIFICATION{  
+export enum DIETARY_CLASSIFICATION {
   // dietary classifications
   vegetarian = 1,
   vegan = 2,
   glutenFree = 3,
-  dairyFree  = 4,
+  dairyFree = 4,
 }
