@@ -55,7 +55,9 @@ export class MealListComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.meals = this.mealService.getMeals();
+    this.mealService.getAllMeals().subscribe((meals) => {
+      this.meals = meals;
+    });
   }
   getMealClassification(dc: number | undefined): Tags[] {
     switch (dc) {

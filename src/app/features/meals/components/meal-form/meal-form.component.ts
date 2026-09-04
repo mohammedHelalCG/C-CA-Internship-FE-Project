@@ -31,7 +31,7 @@ import { validate } from '@angular/forms/signals';
     TextareaModule,
     ButtonModule,
     ToastModule,
-    
+
   ],
   providers: [MessageService],
   templateUrl: './meal-form.component.html',
@@ -71,7 +71,7 @@ export class MealFormComponent implements OnInit {
     private mealService: MealService,
     private cdr: ChangeDetectorRef,
     private messageService: MessageService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -170,7 +170,7 @@ export class MealFormComponent implements OnInit {
     };
 
     if (this.isEditMode) {
-      this.mealService.updateMeal(meal);
+      this.mealService.updateMeal(this.mealId, meal);
     } else {
       this.mealService.createMeal(meal);
     }
