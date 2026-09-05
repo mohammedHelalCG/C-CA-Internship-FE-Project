@@ -39,7 +39,9 @@ export class LoginService {
 
       return false;
     }
+
     this.authService._token = 'mock-token';
+
     this.messageService.add({
       severity: 'success',
       summary: 'Login Successful',
