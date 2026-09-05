@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -71,30 +71,10 @@ export class LoginComponent {
       return;
     }
 
-    const isAuthenticated = this.loginService.authenticate(
-      this.loginForm.value as any
+    this.loginService.authenticate(
+      this.loginForm.value.email,
+      this.loginForm.value.password
     );
 
-    if (isAuthenticated) {
-
-      this.authService._token = 'mock-token';
-
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Login successful',
-        detail: 'Welcome back to CapMeals.',
-      });
-      this.router.navigate(['/meal-list']);
-
-      return;
-    }
-
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Invalid credentials',
-      detail: 'The email or password you entered is incorrect.',
-    });
   }
-
-
 }
