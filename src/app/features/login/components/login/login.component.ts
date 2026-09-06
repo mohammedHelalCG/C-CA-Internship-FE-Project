@@ -21,45 +21,13 @@ export class LoginComponent {
   private loginService = inject(LoginService);
   private messageService = inject(MessageService);
   private authService = inject(AuthService);
-  private router = inject(Router)
-
+  private router = inject(Router);
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required]),
   });
 
-  // onlogin() {
-  //   if (this.loginForm.invalid) {
-  //     this.messageService.add({
-  //       severity: 'error',
-  //       summary: 'Invalid credentials',
-  //       detail: 'The email or password you entered is incorrect.',
-  //     });
-
-  //     return;
-  //   }
-
-  //   this.loginService.authenticate(this.loginForm.value).subscribe({
-  //     next: (response) => {
-  //       console.log(response);
-
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         summary: 'Login successful',
-  //         detail: 'Welcome back to CapMeals.',
-  //       });
-  //     },
-
-  //     error: () => {
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         summary: 'Invalid credentials',
-  //         detail: 'The email or password you entered is incorrect.',
-  //       });
-  //     },
-  //   });
-  // }
   onlogin() {
     if (this.loginForm.invalid) {
       this.messageService.add({
@@ -71,10 +39,28 @@ export class LoginComponent {
       return;
     }
 
-    this.loginService.authenticate(
-      this.loginForm.value.email,
-      this.loginForm.value.password
-    );
+    this.loginService.authenticate(this.loginForm.value).subscribe({
+      next: (response) => {
+        this.authService._token = response.accessToken;
 
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Login successful',
+          detail: 'Welcome back to CapMeals.',
+        });
+
+        this.router.navigate(['/meal-list']);
+      },
+
+      error: (error) => {
+        console.log('Login Error:', error);
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Login Failed',
+          detail: 'Invalid email or password. Please try again.',
+        });
+      },
+    });
   }
 }
