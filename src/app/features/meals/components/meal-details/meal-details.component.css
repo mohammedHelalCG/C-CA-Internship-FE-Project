@@ -26,3 +26,18 @@
   background-color: #ffffff;
   padding: 40px;
 }
+
+.tags {
+  height: 23px;
+  margin-bottom: 16px;
+}
+
+.meal-title {
+  font-size: 32px;
+  height: 39px;
+
+  font-weight: bolder !important;
+  line-height: 39px;
+  color: #232930;
+  align-self: stretch;
+}

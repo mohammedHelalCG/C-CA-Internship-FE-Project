@@ -4,12 +4,15 @@
   </div>
   <div class="meal-content">
     <div class="tags">
-      @for (tag of getMealClassification(meal?.dietaryClassification); track tag) {
-        <p-tag severity="info" [value]="tag.name" />
-      }
+      <div class="flex items-center gap-2">
+        @for (tag of getMealClassification(meal?.dietaryClassification); track tag) {
+          <p-tag severity="info" [value]="tag.name" />
+        }
+      </div>
     </div>
 
-    <h2 class="meal-title">{{ meal?.name }}</h2>
+    <!-- <h2 class="meal-title">{{ meal?.name }}</h2> -->
+    <h2 class="meal-title">Herb Roasted Salmon</h2>
 
     <p class="meal-desc">{{ meal?.description }}</p>
 
