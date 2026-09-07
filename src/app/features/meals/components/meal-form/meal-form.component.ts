@@ -1,12 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -14,11 +8,18 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button'; // added for button module
+import { ButtonModule } from 'primeng/button';
 
-import { Meal } from '../../Interfaces/meal.interface';
+import {
+  ALLERGEN_TRIGGERS,
+  DIETARY_CLASSIFICATION,
+  Meal,
+  MEAL_CATEGORY,
+} from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
-import { validate } from '@angular/forms/signals';
+import { CheckboxModule } from 'primeng/checkbox';
+
+type CheckboxValues = Record<string, boolean>;
 @Component({
   selector: 'app-meal-form',
   standalone: true,
@@ -30,62 +31,68 @@ import { validate } from '@angular/forms/signals';
     TextareaModule,
     ButtonModule,
     ToastModule,
+    CheckboxModule,
   ],
   providers: [MessageService],
   templateUrl: './meal-form.component.html',
   styleUrl: './meal-form.component.css',
 })
-export class MealFormComponent implements OnInit {
+export class MealFormComponent {
   private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private mealService = inject(MealService);
+  private messageService = inject(MessageService);
 
-  isEditMode = false;
+  isEditMode = signal<boolean>(false);
   mealId!: number;
 
   image? = '';
   imageName = '';
   imageMeta = '';
 
-  categories = ['Appetizer', 'Main Course'];
+  categories = MEAL_CATEGORY;
+  dietaryClassification = DIETARY_CLASSIFICATION;
+  allergenTriggers = ALLERGEN_TRIGGERS;
 
   mealForm = this.fb.group({
     name: ['', [Validators.required]],
     category: ['', [Validators.required]],
     price: [0, [Validators.required, Validators.min(1)]],
-    description: [''],
-    calories: [null],
-    protein: [null],
-    carbs: [null],
-    fat: [null],
-    allergenNuts: [false],
-    allergenDairy: [false],
-    allergenFish: [false],
-    allergenGluten: [false],
-    allergenSoy: [false],
+    description: '',
+    calories: null,
+    protein: null,
+    carbs: null,
+    fat: null,
+
+    dietaryClassification: this.fb.nonNullable.group({
+      vegetarian: false,
+      vegan: false,
+      glutenFree: false,
+      dairyFree: false,
+    }),
+
+    allergenTriggers: this.fb.nonNullable.group({
+      allergenNuts: false,
+      allergenDairy: false,
+      allergenFish: false,
+      allergenGluten: false,
+      allergenSoy: false,
+    }),
   });
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private mealService: MealService,
-    private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-  ) {}
-
-  ngOnInit(): void {
+  constructor() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.isEditMode = false;
 
-    // if (id) {
-    //   this.isEditMode = true;
-    //   this.mealId = Number(id);
-
-    //   const existingMeal = this.mealService.getMealById(this.mealId);
-
-    //   if (existingMeal) {
-    //     this.mealForm.patchValue(existingMeal);
-    //     this.image = existingMeal.image;
-    //   }
-    // }
+    if (id) {
+      this.isEditMode.set(true);
+      this.mealId = Number(id);
+      const existingMeal = this.mealService.getMealById(this.mealId);
+      // if (existingMeal) {
+      //   this.mealForm.patchValue(existingMeal);
+      //   this.image = existingMeal.image;
+      // }
+    }
   }
 
   onImageSelected(event: Event): void {
@@ -117,7 +124,6 @@ export class MealFormComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.image = reader.result as string;
-      this.cdr.detectChanges();
     };
     reader.readAsDataURL(file);
   }
@@ -129,11 +135,18 @@ export class MealFormComponent implements OnInit {
     return Math.round(bytes / 1024) + ' KB';
   }
 
+  private selectedOptions(options: CheckboxValues): string[] {
+    return Object.entries(options)
+      .filter(([, selected]) => selected)
+      .map(([option]) => option);
+  }
+
   cancel(): void {
-    this.router.navigate(['/meals']);
+    this.router.navigate(['/meal-list']);
   }
 
   saveMeal(): void {
+    debugger;
     if (this.mealForm.invalid) {
       this.messageService.add({
         severity: 'error',
@@ -143,37 +156,36 @@ export class MealFormComponent implements OnInit {
       return;
     }
 
-    /* plain fb.group controls are nullable, so map to the
-       non-null Meal fields explicitly *    
-       *NOTICE* This will be removed 
-       when Either the API is delivered from the backend or we simulate it into meal service*/
-
-    const v = this.mealForm.getRawValue();
-
     const meal: Meal = {
-      id: this.isEditMode ? this.mealId : Date.now(),
+      // id: this.isEditMode() ? this.mealId : Date.now(),
       imageUrl: this.image,
-      name: v.name ?? '',
-      category: v.category ?? '',
-      price: Number(v.price),
-      description: v.description ?? '',
-      calories: v.calories,
-      protein: v.protein,
-      carbs: v.carbs,
-      fat: v.fat,
-      allergenNuts: v.allergenNuts ?? false,
-      allergenDairy: v.allergenDairy ?? false,
-      allergenFish: v.allergenFish ?? false,
-      allergenGluten: v.allergenGluten ?? false,
-      allergenSoy: v.allergenSoy ?? false,
+      name: this.mealForm.value.name ?? '',
+      category: this.mealForm.value.category ?? '',
+      price: Number(this.mealForm.value.price),
+      description: this.mealForm.value.description ?? '',
+      calories: this.mealForm.value.calories,
+      protein: this.mealForm.value.protein,
+      carbs: this.mealForm.value.carbs,
+      fat: this.mealForm.value.fat,
+      // dietaryClassification: [this.mealForm.value.dietaryClassification],
+      // allergenTriggers: this.selectedOptions(this.mealForm.value.allergenTriggers),
     };
-
-    if (this.isEditMode) {
+    if (this.isEditMode()) {
       this.mealService.updateMeal(this.mealId, meal);
     } else {
-      this.mealService.createMeal(meal);
+      this.mealService.createMeal(meal).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/meal-list']);
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Missing required fields',
+            detail: 'Please fill all fields marked with * before saving.',
+          });
+        },
+      });
     }
-
-    this.router.navigate(['/meals']);
   }
 }

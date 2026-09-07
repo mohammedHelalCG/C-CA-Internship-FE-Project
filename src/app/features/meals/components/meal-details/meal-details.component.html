@@ -1,0 +1,22 @@
+<div class="meal-details">
+  <div class="meal-image">
+    <img [src]="meal?.imageUrl === '' ? `/images/LargeHeroImage.png` : meal?.imageUrl" />
+  </div>
+  <div class="meal-content">
+    <div class="tags">
+      @for (tag of getMealClassification(meal?.dietaryClassification); track tag) {
+        <p-tag severity="info" [value]="tag.name" />
+      }
+    </div>
+
+    <h2 class="meal-title">{{ meal?.name }}</h2>
+
+    <p class="meal-desc">{{ meal?.description }}</p>
+
+    <div class="nutritional-info">
+      <h4>Nutiritional Information</h4>
+    </div>
+
+    <div class="allergen-warning"></div>
+  </div>
+</div>

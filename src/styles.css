@@ -1,7 +1,8 @@
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+
 /* CapMeals — global styles */
 @import 'primeicons/primeicons.css';
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-
 
 * {
   box-sizing: border-box;
@@ -10,7 +11,7 @@
 }
 
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
   /* 16px */
   line-height: 1.5;
@@ -139,10 +140,7 @@ button {
 label {
   display: block;
   font-size: 0.8125rem;
-  /* 13px */
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  /* 8px */
 }
 
 input,
@@ -303,4 +301,12 @@ input.p-inputtext.invalid {
   /* 12px */
   font-weight: 400;
   color: #de350b;
+}
+
+.p-radiobutton-checked .p-radiobutton-box .p-radiobutton-icon {
+  transform: translateZ(0) scale(0.6, 0.6) !important;
+}
+
+.p-checkbox-checked .p-checkbox-box {
+  background: #0070ad !important;
 }

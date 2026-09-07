@@ -62,11 +62,13 @@
       @for (meal of meals(); track meal.id) {
         <div class="grid-item">
           <app-card
-            [title]="meal.name"
+            [mealId]="meal.id"
+            [name]="meal.name"
             [description]="meal.description"
             [image]="meal.imageUrl === '' ? `/images/FoodImage.png` : meal.imageUrl"
             [tags]="getMealClassification(meal?.dietaryClassification)"
             (delete)="confirmDelete(meal)"
+            (viewDetailsBtn)="viewDetails($event)"
           >
           </app-card>
         </div>

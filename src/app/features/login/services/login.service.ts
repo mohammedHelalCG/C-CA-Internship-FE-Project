@@ -8,9 +8,7 @@ import { User } from '@shared/interfaces/user.interface';
 })
 export class LoginService {
   private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app';
-
   private apiUrl = '/auth/login';
-
   private http = inject(HttpClient);
 
   authenticate(user: User): Observable<any> {
