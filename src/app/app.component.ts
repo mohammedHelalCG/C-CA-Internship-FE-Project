@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent],
@@ -8,5 +9,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
   styleUrl: './app.component.css'
 })
 export class App {
+  protected isAuth = inject(AuthService);
   protected readonly title = signal('Cafeteria Management system');
 }
