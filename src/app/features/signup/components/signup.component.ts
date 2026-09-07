@@ -3,11 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MessageService } from 'primeng/api';
 import { Toast } from "primeng/toast";
 import { SignupService } from '../services/signup.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [Toast, ReactiveFormsModule],
+  imports: [Toast, ReactiveFormsModule, RouterLink],
   providers: [MessageService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
