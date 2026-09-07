@@ -4,7 +4,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '@core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   imports: [
     ReactiveFormsModule,
     ToastModule,
+    RouterLink,
   ],
   providers: [],
   templateUrl: './login.component.html',
