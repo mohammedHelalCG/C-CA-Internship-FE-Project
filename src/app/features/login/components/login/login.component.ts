@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, ToastModule],
+  imports: [ReactiveFormsModule, ToastModule, RouterLink],
   providers: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

@@ -7,7 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [Toast, ReactiveFormsModule],
+  imports: [Toast, ReactiveFormsModule, RouterLink],
   providers: [MessageService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
