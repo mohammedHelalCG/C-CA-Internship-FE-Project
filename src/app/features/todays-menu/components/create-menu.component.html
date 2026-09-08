@@ -1,0 +1,133 @@
+<div class="create-menu menu-page page">
+  <header class="page-header">
+    <h1>Create Today's Menu</h1>
+    <p class="subtitle">Select and publish gourmet meal options for reservation</p>
+  </header>
+
+  <div class="menu-shell">
+    <div class="date-field-wrap">
+      <label class="schedule-label">Schedule Date (Up to 5 Days Out)</label>
+      <p-select
+        [options]="scheduleDates"
+        [(ngModel)]="selectedDate"
+        optionLabel="label"
+        optionValue="value"
+        class="schedule-select"
+        [showClear]="false"
+      ></p-select>
+    </div>
+
+    <div class="menu-grid">
+      <section class="menu-panel available-panel">
+        <div class="panel-header">
+          <h2>Available Gourmet Meals</h2>
+          <p>Select the meal items to include on the menu for this day</p>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="p-input-icon-left search-input-wrap">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="search"
+              placeholder="Search available recipes..."
+              aria-label="Search available meals"
+              [ngModel]="searchTerm()"
+              (ngModelChange)="searchTerm.set($event)"
+            />
+          </span>
+        </div>
+
+        <div class="available-list">
+          @if (loading()) {
+            <div class="empty-list">Loading meals...</div>
+          } @else if (loadError()) {
+            <div class="empty-list">{{ loadError() }}</div>
+          } @else if (filteredMeals().length === 0) {
+            <div class="empty-list">No meals available yet</div>
+          } @else {
+            @for (meal of filteredMeals(); track meal.id) {
+              <label
+                class="available-meal-item"
+                [class.is-disabled]="!canSelect(meal)"
+                [attr.for]="'meal-' + meal.id"
+              >
+                <div class="frame">
+                  <p-checkbox
+                    [inputId]="'meal-' + meal.id"
+                    [binary]="true"
+                    [ngModel]="isSelected(meal)"
+                    [disabled]="!canSelect(meal)"
+                    [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="onMealSelectionChange(meal, $event)"
+                  ></p-checkbox>
+
+                  <span class="meal-info">
+                    <span class="meal-name">{{ meal.name }}</span>
+                    <span class="meal-category">{{ meal.category }}</span>
+                  </span>
+                </div>
+              </label>
+            }
+          }
+        </div>
+      </section>
+
+      <aside class="menu-panel selected-panel">
+        <div class="panel-header">
+          <h2>Selected Menu Sequence</h2>
+          <p>Display the meals selected for today's menu</p>
+        </div>
+
+        <p class="selection-count" aria-live="polite">
+          {{ selectedMeals().length }} of {{ maxSelectedMeals }} meals selected
+        </p>
+
+        @if (selectedMeals().length === 0) {
+          <div class="empty-list selected-empty" aria-live="polite"></div>
+        } @else {
+          <ol class="selected-list" aria-label="Selected menu sequence">
+            @for (meal of selectedMeals(); track meal.id) {
+              <li class="selected-meal-item">
+                <p-checkbox
+                  [inputId]="'selected-meal-' + meal.id"
+                  [binary]="true"
+                  [ngModel]="isSelected(meal)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [attr.aria-label]="'Keep ' + meal.name + ' selected'"
+                  (ngModelChange)="onMealSelectionChange(meal, $event)"
+                ></p-checkbox>
+                <span class="meal-info">
+                  <span class="meal-name">{{ meal.name }}</span>
+                  <span class="meal-category">{{ meal.category }}</span>
+                </span>
+                <p-button
+                  icon="pi pi-times"
+                  severity="secondary"
+                  [text]="true"
+                  [rounded]="true"
+                  [attr.aria-label]="'Remove ' + meal.name"
+                  (onClick)="removeSelectedMeal(meal)"
+                />
+              </li>
+            }
+          </ol>
+        }
+      </aside>
+    </div>
+
+    <div class="page-actions">
+      <p-button label="Cancel" severity="secondary" styleClass="cancel-btn" />
+      <p-button
+        label="Create Today's Menu"
+        styleClass="submit-btn"
+        [loading]="submitting()"
+        [disabled]="selectedMealIds().length === 0"
+        (onClick)="createMenu()"
+      />
+    </div>
+    @if (submitError()) {
+      <p class="submit-error" role="alert">{{ submitError() }}</p>
+    }
+  </div>
+</div>

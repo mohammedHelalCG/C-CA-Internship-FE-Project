@@ -19,6 +19,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./features/meals/meals.routes').then((m) => m.MEALS_ROUTES),
   },
+  {
+    path: 'todays-menu',
+    loadComponent: () =>
+      import('./features/todays-menu/components/create-menu.component').then((c) => c.CreateMenuComponent),
+  },
 
   {
     path: '',

@@ -167,7 +167,7 @@ export class MealFormComponent implements OnInit {
       allergenGluten: v.allergenGluten ?? false,
       allergenSoy: v.allergenSoy ?? false,
     };
-
+    debugger;
     if (this.isEditMode) {
       this.mealService.updateMeal(this.mealId, meal);
     } else {
