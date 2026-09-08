@@ -5,6 +5,7 @@ import { Meal } from '@features/meals/Interfaces/meal.interface';
 import { Tags } from '@shared/interfaces/tags.interface';
 import { TagModule } from 'primeng/tag';
 
+
 @Component({
   selector: 'app-meal-details',
   imports: [TagModule],
@@ -21,18 +22,23 @@ export class MealDetails {
   }
 
   getMealClassification(classifications: string[] | undefined): Tags[] {
-    const tagStyles: Record<string, string> = {
-      vegetarian: 'green',
-      vegan: 'yellow',
-      glutenFree: 'blue',
-      dairyFree: 'red',
+
+    const tagStyles: Record<string, "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | null | undefined> = {
+      VEGETARIAN: 'success',
+      VEGAN: 'warn',
+      GLUTEN_FREE: 'secondary',
+      DAIRY_FREE: 'danger',
     };
 
-    return (classifications ?? [])
-      .filter((classification) => classification in tagStyles)
-      .map((classification) => ({
+    if (!classifications || classifications.length === 0) {
+      return [];
+    }
+
+    return (classifications).filter((classification) => classification in tagStyles).map((classification) => (
+      {
         name: classification,
         color: tagStyles[classification],
-      }));
+      }
+    ));
   }
 }

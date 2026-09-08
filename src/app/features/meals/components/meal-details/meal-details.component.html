@@ -1,25 +1,97 @@
 <div class="meal-details">
   <div class="meal-image">
-    <img [src]="meal?.imageUrl === '' ? `/images/LargeHeroImage.png` : meal?.imageUrl" />
+    <img [src]="meal?.imageUrl || '/images/LargeHeroImage.png'" [alt]="meal?.name" />
   </div>
+
   <div class="meal-content">
     <div class="tags">
-      <div class="flex items-center gap-2">
-        @for (tag of getMealClassification(meal?.dietaryClassification); track tag) {
-          <p-tag severity="info" [value]="tag.name" />
-        }
+      @for (tag of getMealClassification(meal?.dietaryClassification); track $index ) {
+      <p-tag [severity]="tag.color" [value]="tag.name" />
+      }
+
+    </div>
+
+    <h1 class="meal-title">
+      {{ meal?.name }}
+    </h1>
+
+    <p class="meal-desc">
+      {{ meal?.description }}
+    </p>
+
+    <div class="nutritional-info">
+      <h3 class="section-title">
+        Nutritional Information
+      </h3>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Calories</span>
+          <strong class="stat-value">
+            {{ meal?.calories }} kcal
+          </strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Protein</span>
+          <strong class="stat-value">
+            {{ meal?.protein }}g
+          </strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Carbs</span>
+          <strong class="stat-value">
+            {{ meal?.carbs }}g
+          </strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Fat</span>
+          <strong class="stat-value">
+            {{ meal?.fat }}g
+          </strong>
+        </div>
       </div>
     </div>
 
-    <!-- <h2 class="meal-title">{{ meal?.name }}</h2> -->
-    <h2 class="meal-title">Herb Roasted Salmon</h2>
+    <!-- Category Section -->
+    <div class="ingredients-section">
+      <h3 class="section-title">
+        Category
+      </h3>
 
-    <p class="meal-desc">{{ meal?.description }}</p>
-
-    <div class="nutritional-info">
-      <h4>Nutiritional Information</h4>
+      <p class="ingredients-text">
+        {{ meal?.category }}
+      </p>
     </div>
 
-    <div class="allergen-warning"></div>
+    <!-- Price Section -->
+    <div class="ingredients-section">
+      <h3 class="section-title">
+        Price
+      </h3>
+
+      <p class="ingredients-text">
+        {{ meal?.price }}
+      </p>
+    </div>
+
+    @if (meal?.allergenTriggers?.length) {
+    <div class="allergen-warning">
+      <i class="pi pi-exclamation-triangle"></i>
+
+      <div class="warning-content">
+        <div class="warning-title">
+          Allergen Warning
+        </div>
+
+        <div class="warning-text">
+          Contains:
+          {{ meal?.allergenTriggers?.join(', ') }}
+        </div>
+      </div>
+    </div>
+    }
   </div>
 </div>
