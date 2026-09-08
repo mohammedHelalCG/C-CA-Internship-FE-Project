@@ -13,7 +13,7 @@
     </div>
     <div class="flex items-center gap-2">
       @for (tag of tags; track $index) {
-        <p-tag severity="info" [value]="tag.name" />
+      <p-tag [severity]="tag.color" [value]="tag.name" />
       }
     </div>
   </ng-template>

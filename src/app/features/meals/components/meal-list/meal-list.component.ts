@@ -69,11 +69,11 @@ export class MealListComponent {
   ];
 
   getMealClassification(classifications: string[] | undefined): Tags[] {
-    const tagStyles: Record<string, string> = {
-      vegetarian: 'green',
-      vegan: 'yellow',
-      glutenFree: 'blue',
-      dairyFree: 'red',
+    const tagStyles: Record<string, "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | null | undefined> = {
+      VEGETARIAN: 'success',
+      VEGAN: 'warn',
+      GLUTEN_FREE: 'secondary',
+      DAIRY_FREE: 'danger',
     };
 
     return (classifications ?? [])
