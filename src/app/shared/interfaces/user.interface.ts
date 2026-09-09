@@ -1,4 +1,7 @@
 export interface User {
     email: string;
-    password: string;
+    employeeCode: string;
+    name: string;
+    role: string;
+
 }

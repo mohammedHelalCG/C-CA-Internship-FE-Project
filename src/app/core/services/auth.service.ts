@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { User } from '@shared/interfaces/user.interface';
+import { jwtDecode } from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root',
@@ -20,4 +23,18 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
+
+  decodeToken(encodedToken: string) {
+    const token = encodedToken;
+    const decodedToken = jwtDecode(token);
+    localStorage.setItem('decodedtoken', JSON.stringify(decodedToken));
+
+  }
+
+  get decodedtoken(): User | null {
+    const val = localStorage.getItem('decodedtoken');
+    const parsedVal = JSON.parse(val!);
+    return parsedVal;
+  }
+
 }

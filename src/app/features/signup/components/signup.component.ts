@@ -44,6 +44,7 @@ export class SignupComponent {
       employeeCode: this.signupForm.value.ggid,
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
+      role: "EMPLOYEE"
     };
 
     this.signupService.register(user).subscribe({

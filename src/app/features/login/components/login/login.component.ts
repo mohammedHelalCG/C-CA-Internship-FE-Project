@@ -5,7 +5,6 @@ import { ToastModule } from 'primeng/toast';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '@core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -40,14 +39,16 @@ export class LoginComponent {
     this.loginService.authenticate(this.loginForm.value).subscribe({
       next: (response) => {
         this.authService._token = response.accessToken;
-        if (this.authService._token) this.decodeToken(this.authService._token);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Login successful',
-          detail: 'Welcome back to CapMeals.',
-        });
+        if (this.authService.token) {
+          this.authService.decodeToken(this.authService.token);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Login successful',
+            detail: 'Welcome back to CapMeals.',
+          });
 
-        this.router.navigate(['/meal-list']);
+          this.router.navigate(['/meal-list']);
+        }
       },
 
       error: (error) => {
@@ -62,9 +63,4 @@ export class LoginComponent {
     });
   }
 
-  decodeToken(encodedToken: string) {
-    const token = encodedToken;
-    const decodedToken = jwtDecode(token);
-    console.log(decodedToken);
-  }
 }
