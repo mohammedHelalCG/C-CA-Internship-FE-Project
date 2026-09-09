@@ -22,6 +22,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('decodedtoken');
   }
 
   decodeToken(encodedToken: string) {
