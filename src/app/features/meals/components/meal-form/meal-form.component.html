@@ -2,10 +2,10 @@
   <p-toast />
 
   <div class="page-header">
-    <h1>{{ isEditMode ? 'Edit Meal Details' : 'Add New Gourmet Meal' }}</h1>
+    <h1>{{ isEditMode() ? 'Edit Meal Details' : 'Add New Gourmet Meal' }}</h1>
     <p class="subtitle">
       {{
-        isEditMode
+        isEditMode()
           ? `Modify meal parameters and nutritional stats`
           : `Input high-fidelity meal details for daily
         reservations`
@@ -13,9 +13,10 @@
     </p>
   </div>
 
-  <form class="meal-form" [formGroup]="mealForm">
+  <form class="meal-form" [formGroup]="mealForm" (ngSubmit)="saveMeal()">
     <!-- LEFT CARD — main details -->
     <div class="card form-main">
+      <!-- meal name -->
       <div class="form-field">
         <label for="name">Meal Name <span class="req">*</span></label>
         <input
@@ -39,8 +40,8 @@
         }
       </div>
 
-      <!-- category + price: essentials row -->
       <div class="field-row">
+        <!-- category  -->
         <div class="form-field">
           <label>Category <span class="req">*</span></label>
           <div
@@ -51,12 +52,22 @@
               mealForm.controls['category'].invalid
             "
           >
-            @for (cat of categories; track $index) {
-              <div class="radio-option">
-                <p-radiobutton [inputId]="cat" [value]="cat" formControlName="category" />
-                <label [for]="cat">{{ cat }}</label>
-              </div>
-            }
+            <div class="flex items-center gap-1">
+              <p-radiobutton
+                [inputId]="categories[0]"
+                [value]="categories[0]"
+                formControlName="category"
+              />
+              <label pLabel [for]="categories[0]" class="text-sm ml-2">Appetizer</label>
+            </div>
+            <div class="flex items-center gap-1">
+              <p-radiobutton
+                [inputId]="categories[1]"
+                [value]="categories[1]"
+                formControlName="category"
+              />
+              <label pLabel [for]="categories[1]" class="text-sm ml-2">Main Course</label>
+            </div>
           </div>
           @if (
             mealForm.controls['category'].touched &&
@@ -67,6 +78,7 @@
           }
         </div>
 
+        <!-- price input -->
         <div class="form-field">
           <label for="price">Price <span class="req">*</span></label>
           <p-inputnumber formControlName="price" />
@@ -80,6 +92,7 @@
         </div>
       </div>
 
+      <!-- description input -->
       <div class="form-field">
         <label for="description">Description</label>
         <textarea
@@ -91,6 +104,7 @@
         ></textarea>
       </div>
 
+      <!-- image input -->
       <div class="form-field">
         <label for="image">Upload Food Photo</label>
 
@@ -138,75 +152,79 @@
         <div class="nutrition-grid">
           <div class="form-field">
             <label for="calories">Calories (kcal)</label>
-            <input
-              id="calories"
-              type="number"
-              pInputText
-              formControlName="calories"
-              placeholder="450"
-            />
+            <p-inputnumber inputId="calories" formControlName="calories" placeholder="450" />
           </div>
           <div class="form-field">
             <label for="protein">Protein (g)</label>
-            <input
-              id="protein"
-              type="number"
-              pInputText
-              formControlName="protein"
-              placeholder="24"
-            />
+            <p-inputnumber inputId="protein" formControlName="protein" placeholder="24" />
           </div>
           <div class="form-field">
             <label for="carbs">Carbs (g)</label>
-            <input id="carbs" type="number" pInputText formControlName="carbs" placeholder="55" />
+            <p-inputnumber inputId="carbs" formControlName="carbs" placeholder="55" />
           </div>
           <div class="form-field">
             <label for="fat">Fat (g)</label>
-            <input id="fat" type="number" pInputText formControlName="fat" placeholder="12" />
+            <p-inputnumber inputId="fat" formControlName="fat" placeholder="12" />
           </div>
         </div>
 
         <h3>Dietary Classifications</h3>
 
-        <!-- <div class="checkbox-list">
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="vegetarian" /> Vegetarian
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="vegan" /> Vegan
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="glutenFree" /> Gluten-Free
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="dairyFree" /> Dairy-Free
-          </label>
-        </div> -->
+        <div class="flex gap-2" formGroupName="dietaryClassification">
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="vegetarian" formControlName="vegetarian" />
+            <label for="vegetarian" class="text-sm">Vegetarian</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="vegan" formControlName="vegan" />
+            <label for="vegan" class="text-sm">Vegan</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="glutenFree" formControlName="glutenFree" />
+            <label for="glutenFree" class="text-sm">Gluten Free</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="dairyFree" formControlName="dairyFree" />
+            <label for="dairyFree" class="text-sm">Dairy Free</label>
+          </div>
+        </div>
 
         <h3>Allergen Triggers</h3>
 
-        <!-- <div class="checkbox-row">
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="allergenNuts" /> Nuts
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="allergenDairy" /> Dairy
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="allergenFish" /> Fish
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="allergenGluten" /> Gluten
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" formControlName="allergenSoy" /> Soy
-          </label>
-        </div> -->
+        <div class="flex gap-2" formGroupName="allergenTriggers">
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="allergenNuts" formControlName="allergenNuts" />
+            <label for="allergenNuts" class="text-sm">Nuts</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="allergenDairy" formControlName="allergenDairy" />
+            <label for="allergenDairy" class="text-sm">Dairy</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="allergenFish" formControlName="allergenFish" />
+            <label for="allergenFish" class="text-sm">Fish</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="allergenGluten" formControlName="allergenGluten" />
+            <label for="allergenGluten" class="text-sm">Gluten</label>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <p-checkbox inputId="allergenSoy" formControlName="allergenSoy" />
+            <label for="allergenSoy" class="text-sm">Soy</label>
+          </div>
+        </div>
       </div>
 
       <div class="form-actions">
         <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
-        <!-- @if (isEditMode) {
+        <!-- @if (isEditMode()) {
           <button
             type="submit"
             class="btn btn-primary"
@@ -216,14 +234,7 @@
             Update Meal
           </button>
         } @else { -->
-        <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="saveMeal()"
-          [disabled]="mealForm.invalid"
-        >
-          Save Meal
-        </button>
+        <button type="submit" class="btn btn-primary">Save Meal</button>
         <!-- } -->
       </div>
     </div>

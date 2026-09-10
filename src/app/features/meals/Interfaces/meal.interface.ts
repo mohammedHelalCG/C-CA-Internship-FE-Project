@@ -1,31 +1,39 @@
 export interface Meal {
-  id: number;
+  id?: number;
   name: string;
-  category: string;
-  price: number;
   description: string;
+  price: number;
   imageUrl?: string;
-
-  dietaryClassification?: DIETARY_CLASSIFICATION;
-
-  // nutrition (Figma: Nutritional Breakdown)
+  category: string;
   calories?: number | null;
   protein?: number | null;
   carbs?: number | null;
   fat?: number | null;
 
-  // allergen triggers
-  allergenNuts?: boolean;
-  allergenDairy?: boolean;
-  allergenFish?: boolean;
-  allergenGluten?: boolean;
-  allergenSoy?: boolean;
+  dietaryClassification?: string[];
+
+  allergenTriggers?: string[];
 }
 
+// dietary classifications
 export enum DIETARY_CLASSIFICATION {
-  // dietary classifications
-  vegetarian = 1,
-  vegan = 2,
-  glutenFree = 3,
-  dairyFree = 4,
+  VEGETARIAN = 1,
+  VEGAN = 2,
+  GLUTEN_FREE = 3,
+  DAIRY_FREE = 4,
+}
+
+// meal categories
+export enum MEAL_CATEGORY {
+  APPETIZER = 0,
+  MAIN_COURSE = 1,
+}
+
+// allergen triggers
+export enum ALLERGEN_TRIGGERS {
+  NUTS = 0,
+  DAIRY = 1,
+  FISH = 2,
+  GLUTEN = 3,
+  SOY = 4,
 }

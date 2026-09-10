@@ -83,22 +83,13 @@
 
 /* Cards Structural Grid Layout */
 .meals-grid {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(1, 409px);
+  column-gap: 24px;
+  row-gap: 32px;
 }
 
-.grid-item {
-  display: flex;
-  flex-direction: column;
-
-  min-width: 33%;
-  max-width: 30%;
-
-  min-height: 409px;
-  max-height: 409px;
-}
 .search {
   width: 220px; /* Set your desired width */
   height: 40px; /* Set your desired height */

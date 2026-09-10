@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Meal } from '../Interfaces/meal.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,8 +9,7 @@ import { Observable } from 'rxjs';
 export class MealService {
   private baseUrl = 'https://c-ca-internship-backend-project-production.up.railway.app/';
   private apiUrl = 'meals';
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getAllMeals(): Observable<Meal[]> {
     return this.http.get<Meal[]>(this.baseUrl + this.apiUrl);

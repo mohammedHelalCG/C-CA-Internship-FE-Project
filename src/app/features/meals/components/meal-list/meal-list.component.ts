@@ -4,7 +4,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import { DIETARY_CLASSIFICATION, Meal } from '../../Interfaces/meal.interface';
+import { Meal } from '../../Interfaces/meal.interface';
 import { MealService } from '../../services/meal.service';
 import { Router } from '@angular/router';
 import { Card } from '../../../../shared/components/card/card.component';
@@ -68,52 +68,20 @@ export class MealListComponent {
     },
   ];
 
-  getMealClassification(dc: number | undefined): Tags[] {
-    switch (dc) {
-      case 1:
-        // 'vegetarian'
-        return [
-          {
-            name: DIETARY_CLASSIFICATION[1],
-            color: 'green',
-          },
-        ];
-        break;
-      case 2:
-        // 'vegan'
-        return [
-          {
-            name: DIETARY_CLASSIFICATION[2],
-            color: 'yellow',
-          },
-        ];
-        break;
-      case 3:
-        // 'glutenFree'
-        return [
-          {
-            name: DIETARY_CLASSIFICATION[3],
-            color: 'blue',
-          },
-        ];
-        break;
-      case 4:
-        // 'dairyFree'
-        return [
-          {
-            name: DIETARY_CLASSIFICATION[4],
-            color: 'red',
-          },
-        ];
-        break;
-      default:
-        return [
-          {
-            name: DIETARY_CLASSIFICATION[1],
-            color: 'green',
-          },
-        ];
-    }
+  getMealClassification(classifications: string[] | undefined): Tags[] {
+    const tagStyles: Record<string, "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | null | undefined> = {
+      VEGETARIAN: 'success',
+      VEGAN: 'warn',
+      GLUTEN_FREE: 'secondary',
+      DAIRY_FREE: 'danger',
+    };
+
+    return (classifications ?? [])
+      .filter((classification) => classification in tagStyles)
+      .map((classification) => ({
+        name: classification,
+        color: tagStyles[classification],
+      }));
   }
 
   confirmDelete(meal: Meal): void {
@@ -132,5 +100,9 @@ export class MealListComponent {
 
   navToCreate(): void {
     this.router.navigate(['meal-list/create']);
+  }
+
+  viewDetails(mealId: number): void {
+    this.router.navigate(['meal-list/details', mealId]);
   }
 }

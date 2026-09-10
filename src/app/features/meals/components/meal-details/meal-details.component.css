@@ -1,0 +1,138 @@
+.meal-details {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 48px;
+
+}
+
+.meal-image {
+  width: 500px;
+  flex-shrink: 0;
+}
+
+.meal-image img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.meal-content {
+  flex: 1;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meal-tag {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.meal-tag.protein {
+  background: #e6f4fa;
+  color: #0070ad;
+}
+
+.meal-tag.neutral,
+.meal-tag.dietary {
+  background: #f4f5f7;
+  color: #232930;
+}
+
+.meal-title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 39px;
+  color: #232930;
+}
+
+.meal-desc {
+  font-size: 16px;
+  line-height: 26px;
+  color: #5b6770;
+}
+
+.section-title {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #232930;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: #f3f5f9;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.stat-card span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5b6770;
+  margin-bottom: 4px;
+}
+
+.stat-card strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0070ad;
+}
+
+.ingredients-section p {
+  font-size: 15px;
+  line-height: 24px;
+  color: #5b6770;
+}
+
+.allergen-warning {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffebe6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.allergen-warning i {
+  font-size: 24px;
+  color: #e07b00;
+}
+
+.warning-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.warning-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #e07b00;
+}
+
+.warning-text {
+  font-size: 13px;
+  color: #e07b00;
+}
